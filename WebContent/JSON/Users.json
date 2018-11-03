@@ -1,0 +1,216 @@
+	{
+	"customersList" : [ {
+					"Name" : "anurudh",
+					"phno" : "9584569859",
+					"DOB" : "01-12-1995",
+					"gmail" : "anurudh@gmail.com",
+					"customerId" : "1002456789",
+					"Password" :"anu"
+				}, {
+					"Name" : "prakash",
+					"phno" : "9584569869",
+					"DOB" : "26-04-1997",
+					"gmail" : "prakash@gmail.com",
+					"customerId" :"1003456789",
+					"Password" :"pra"
+				}, {
+					"Name" : "roopesh",
+					"phno" : "9584543859",
+					"DOB" : "08-09-1999",
+					"gmail" : "roopesh@gmail.com",
+					"customerId"  : "1005456789",
+					"Password" :"roopa"
+					}, {
+					"Name" : "prabhakar",
+					"phno" : "9585769859",
+					"DOB" : "19-05-1995",
+					"gmail" : "prabhakar@gmail.com",
+					"customerId" : "1006456789",
+					"Password" :"pra"
+				} ],
+				
+				"currentUser" :{},
+			
+		"Accountdetails":[
+			{
+			"generateId" :"2334567891",
+			"customerId":"1002456789",
+			"accountno": "EN1324569870012",
+			"name": "anurudh",
+			"mobileno":"9584569859",
+			"branch" :"guntur",
+			"branchcode":"0012467",
+			"pin":"5220014",
+			"language":"EN",
+			"status":"A"
+			  },
+			{
+			"generateId" :"2334567892",
+			"customerId":"1003456789",
+			"accountno": "EN1324569870013",
+			"name": "prakash",
+			"mobileno":"9584569869",
+			"branch" :"visakhapatnam",
+			"branchcode":"0012468",
+			"pin":"5320172",
+			"language":"EN",
+			"status":"A"
+			  },
+			  {
+			  "generateId" :"2334567893",
+			"customerId":"1005456789",
+			"accountno": "EN1324569870014",
+			"name": "roopesh",
+			"mobileno":"9584543859",
+			"branch" :"piduguralla",
+			"branchcode":"0012469",
+			"pin":"5220015",
+			"language":"EN",
+			"status":"A"
+			  },
+			  {
+			  "generateId" :"2334567894",
+			"customerId":"1006456789",
+			"accountno": "EN1324569870015",
+			"name": "prabhakar",
+			"mobileno":"9585769859",
+			"branch" :"gnt1town",
+			"branchcode":"0012465",
+			"pin":"5220016",
+			"language":"EN",
+			"status":"A"
+			  },
+			  {
+			  "generateId" :"2334567895",
+			"customerId":"1006456789",
+			"accountno": "EN1324569870016",
+			"name": "prabhakar",
+			"mobileno":"9585769859",
+			"branch" :"vijayawada",
+			"branchcode":"7012465",
+			"pin":"5250016",
+			"language":"EN",
+			"status":"A"
+			  },
+			  {
+			  "generateId" :"2334567896",
+			"customerId":"1003456789",
+			"accountno": "EN1324569870017",
+			"name": "prakash",
+			"mobileno":"9584569869",
+			"branch" :"machilipatnam",
+			"branchcode":"8012465",
+			"pin":"5240016",
+			"language":"DE",
+			"status":"I"
+			  },
+			  {
+			  "generateId" :"2334567897",
+			"customerId":"1005456789",
+			"accountno": "EN1324569870018",
+			"name": "roopesh",
+			"mobileno":"9585769859",
+			"branch" :"prodattur",
+			"branchcode":"9012465",
+			"pin":"5230016",
+			"language":"EN",
+			"status":"A"
+			  }
+	],
+	"TransactionHistory":[
+		{
+			"from":"EN1324569870012",
+			"to":"EN1324569870013",
+			"type" :"C",
+			"Amount":"1000",
+				"Balance":"1500",
+				"Transdate":"30/1/2012",
+				"Transtime":"10:23:21",
+				"Transactiontype":"ATA"
+			
+			},
+			{
+				"from":"EN1324569870014",
+				"to":"EN1324569870015",
+				"type" :"C",
+				"Amount":"500",
+					"Balance":"1500",
+					"Transdate":"30/1/2012",
+					"Transtime":"10:23:21",
+					"Transactiontype":"ATA"
+			}
+	],
+	"ActiveUsers":[
+		
+			{
+				"customerId":"1002456789",
+				"accountno": "EN1324569870012",
+				"branch" :"guntur",
+				"branchcode":"0012467",
+				"IFSCCode":"00345",
+				"TransactionLimit":"30000",
+				"status":"A"
+				  },
+				{
+				
+				"customerId":"1003456789",
+				"accountno": "EN1324569870013",
+				"branch" :"visakhapatnam",
+				"branchcode":"0012468",
+				"IFSCCode":"00123",
+				"TransactionLimit":"30000",
+				"status":"A"
+				  },
+				  {
+				  
+				"customerId":"1005456789",
+				"accountno": "EN1324569870014",
+				"branch" :"piduguralla",
+				"branchcode":"0012469",
+				"IFSCCode":"00245",
+				"TransactionLimit":"30000",
+				"status":"A"
+				  },
+				  {
+				 
+				"customerId":"1006456789",
+				"accountno": "EN1324569870015",
+				"branch" :"gnt1town",
+				"branchcode":"0012465",
+				"IFSCCode":"00545",
+				"TransactionLimit":"30000",
+				"status":"A"
+				  },
+				  {
+				  
+				"customerId":"1006456789",
+				"accountno": "EN1324569870016",
+				"branch" :"vijayawada",
+				"branchcode":"7012465",
+				"IFSCCode":"00945",
+				"TransactionLimit":"30000",
+				"status":"A"
+				  },
+				  {
+				  
+				"customerId":"1003456789",
+				"accountno": "EN1324569870017",
+				"branch" :"machilipatnam",
+				"branchcode":"8012465",
+				"IFSCCode":"00375",
+				"TransactionLimit":"30000",
+				"status":"I"
+				  },
+				  {
+				 
+				"customerId":"1005456789",
+				"accountno": "EN1324569870018",
+				"branch" :"prodattur",
+				"branchcode":"9012465",
+				"IFSCCode":"00395",
+				"TransactionLimit":"30000",
+				"status":"A"
+				  }
+		
+	]
+	}
