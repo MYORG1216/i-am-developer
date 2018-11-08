@@ -48,6 +48,11 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 				"pattern" : "ActiveUsers",
 				"name" : "ActiveUsers",
 				"target" : "ActiveUsers"
+			},
+			{
+				"pattern" : "DetailView",
+				"name" : "DetailView",
+				"target" : "DetailView"
 			}
 			],
 			"targets" : {
@@ -78,7 +83,12 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 			"ActiveUsers" : {
 					"viewName" : "ActiveUsers",
 					"controlAggregation" : "pages"
-				},	
+				},
+				"DetailView" : {
+					"viewName" : "DetailView",
+					"controlAggregation" : "pages"
+					
+				}
 				
 			}
 		}

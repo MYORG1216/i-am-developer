@@ -6,10 +6,8 @@ sap.ui.controller("banking.OnlineBanking.details", {
 * @memberOf OnlineBanking.details
 */
 	
-	navigate(){
-		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("firstpage");
-	},
+	
+	
 	
 	navi1(){
 		var router = sap.ui.core.UIComponent.getRouterFor(this);

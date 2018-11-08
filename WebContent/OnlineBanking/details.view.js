@@ -13,24 +13,18 @@ sap.ui.jsview("banking.OnlineBanking.details", {
 	* @memberOf OnlineBanking.details
 	*/ 
 	createContent : function(oController) {
- 		return new sap.m.Page({
- 			title: "Title",
- 			
-			subHeader:new sap.m.Bar({
-				contentRight:[
-					new sap.m.Button({text:"SignOut",
-					press:()=>{
-						oController.navigate();
-						}
-					})
-					]
-				}),
+ 	
+		return new sap.m.Page({
+			title:"Details",
+			showNavButton:true,
+			navButtonPress: () => {
+			
+				var router = sap.ui.core.UIComponent.getRouterFor(this);
+				router.navTo("firstpage");
+			},
+
 				
 			content: [
-				
-				
-				
-					
 					new sap.m.GenericTile({
 		 			header:"AccountInfo",
 		 			headerImage:"sap-icon://account",

@@ -16,7 +16,7 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 				formElements:[
 					new sap.ui.layout.form.FormElement
 					({	
-						label:"UserInfo",
+						label:"UserName",
 						fields:[ new sap.m.Input({width:"250px",
 							type:sap.m.InputType.Number
 							})]
@@ -49,7 +49,7 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 					({
 						label:"Remarks",
 						fields:[ new sap.m.Input({width:"250px",
-						types:sap.m.InputType.Number	
+						types:sap.m.InputType.Text	
 						})]
 					}),
 					new sap.ui.layout.form.FormElement
@@ -60,11 +60,14 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 							new sap.m.SegmentedButton({
 								buttons:[
 									new sap.m.Button({
-										text:"proceed",
-										width:"100px"
+										text:"confirm",
+										width:"100px",
+											press:function(){
+											odialog1.open();
+											}
 									}),
 									new sap.m.Button({
-										text:"cancel",
+										text:"clear",
 									    width:"100px"
 									})
 								]
@@ -78,29 +81,44 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 				]
 				})  
 		
+				
+		
+		
+		let odialog1 = new sap.m.Dialog({
+			title:"MessageBox",
+	content:[
+		new sap.m.Text({
+			text:"Confirm the transaction"
+		}),
+//		],
+//		footer: new sap.m.Bar({
+//			content:[
+			new sap.m.Button({
+				text:"ok"
+			}),
+			new sap.m.Button({
+				text:"cancel",
+				press:()=>{
+					odialog1.close();
+				}
+			})
+			]
+//		})
+//		
+	
+		})
+		
 		
  		return new sap.m.Page({
-			
-			subHeader:new sap.m.Bar({
-				
-				contentLeft:[
-					new sap.m.Button({text:"",
-						icon:"sap-icon://nav-back",
-						press:()=>{
-						oController.navigate();
-						}
-					})
-					],
-					contentMiddle:[
-						new sap.m.Text({text:"Newtrans",
-							})
-					]
-				}),
+ 			showNavButton:true,
+ 			title:"New Transaction",
+			navButtonPress: () => {
+				var router = sap.ui.core.UIComponent.getRouterFor(this);
+				router.navTo("details");
+			},
 			content: [
-				
 			      Form
 			]
 		});
 	}
-
 });

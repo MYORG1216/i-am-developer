@@ -9,10 +9,6 @@ sap.ui.controller("banking.OnlineBanking.Newtrans", {
 //
 //	},
 
-	navigate(){
-		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("details");
-	},
 	
 	
 	

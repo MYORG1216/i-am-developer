@@ -13,6 +13,62 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 	* @memberOf OnlineBanking.ActiveUsers
 	*/ 
 	createContent : function(oController) {
+		let oView = this;
+	     let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
+	     this.setModel(oModel, "Users");
+	     
+		oView.oTable2 = new sap.m.Table
+		({
+			
+			columns:[
+				
+				new sap.m.Column({
+					header:new sap.m.Text({text:"CustomerId"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Accountno"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Branch"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Branchcode"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"IFSCCode"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"TransactionLimit"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Status"})
+				})
+				
+				
+			],
+			
+			items:{
+				 path: "Users>/ActiveUsers",
+               
+                  factory: function(sIdx, oContxt) {
+                      debugger;
+                      return new sap.m.ColumnListItem({
+                         cells:[
+
+                      	   new sap.m.Text({text: "{Users>customerId}" }),
+                      	   new sap.m.Text({text: "{Users>accountno}" }),
+                      	   new sap.m.Text({text: "{Users>branch}" }),
+                      	   new sap.m.Text({text: "{Users>branchcode}" }),
+                      	   new sap.m.Text({text: "{Users>IFSCCode}" }),
+                      	   new sap.m.Text({text: "{Users>TransactionLimit}" }),
+                      	   new sap.m.Text({text: "{Users>status}" })
+                      	   
+                         ]
+                      })
+                  }	
+		}	
+		})
+		
 		
 		
 		
@@ -26,7 +82,7 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 						formElements:[
 							new sap.ui.layout.form.FormElement
 							({	
-								label:"customerId",
+								label:"Name",
 								fields:[ new sap.m.Input({width:"250px",
 									type:sap.m.InputType.Number
 									})]
@@ -38,6 +94,15 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 					type:sap.m.InputType.Number
 					})]
 			}),
+			
+			new sap.ui.layout.form.FormElement
+			({	
+				label:"RetypeAccountNo",
+				fields:[ new sap.m.Input({width:"250px",
+					type:sap.m.InputType.Text
+					})]
+			}),
+			
 			new sap.ui.layout.form.FormElement
 			({	
 				label:"Branch",
@@ -59,13 +124,7 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 					type:sap.m.InputType.Number
 					})]
 			}),
-			new sap.ui.layout.form.FormElement
-			({	
-				label:"Status",
-				fields:[ new sap.m.Input({width:"250px",
-					type:sap.m.InputType.Text
-					})]
-			}),
+			
 			new sap.ui.layout.form.FormElement
 			({	
 				label:"TransactionLimit",
@@ -89,35 +148,47 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 					
 					]
 			})
-		]
+		],
+		footer: new sap.m.Bar({
+			contentLeft:[
+				new sap.m.Button({
+					text:"submit"
+				
+				})
+			], 
+			contentRight: [
+				new sap.m.Button({
+					text:"cancel"
+					
+				})
+			]
+		})
+		
 		});
 		
- 		return new sap.m.Page({
+ 		    return new sap.m.Page({
 			title: "ActiveUsers",
-			subHeader:new sap.m.Bar({
-				contentLeft:[
-					new sap.m.Button({text:"",
-						icon:"sap-icon://nav-back",
-						press:()=>{
-						oController.navigate();
+			showNavButton:true,
+		subHeader:new sap.m.Bar({
+			contentRight:[
+				new sap.m.Button({
+					icon:"sap-icon://sys-add",
+						press:function(){
+							debugger;
+							odialog.open();	
 						}
-					})
-					],
-					contentRight:[
-						new sap.m.Button({
-							icon:"sap-icon://sys-add",
-								press:()=>{
-									odialog.open();
-								}
-						}),
-						new sap.m.Button({
-							icon:"sap-icon://sys-minus"
-						})
-					]
-				}),
+				})
+			]	
+		}),
+			navButtonPress: () => {
+				var router = sap.ui.core.UIComponent.getRouterFor(this);
+				router.navTo("details");
+			},
+
 			content: [
-			
+			oView.oTable2
 			]
+			
 		});
 	}
 

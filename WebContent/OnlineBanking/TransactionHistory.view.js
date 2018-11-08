@@ -13,20 +13,77 @@ sap.ui.jsview("banking.OnlineBanking.TransactionHistory", {
 	* @memberOf OnlineBanking.TransactionHistory
 	*/ 
 	createContent : function(oController) {
+		let oView = this;
+	     let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
+	     this.setModel(oModel, "Users");
+		
+		
+		oView.oTable1 = new sap.m.Table
+		({
+			
+			columns:[
+				
+				new sap.m.Column({
+					header:new sap.m.Text({text:"From"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"To"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Type"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Amount"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Balance"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Transdate"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Transtime"})
+				}),
+				new sap.m.Column({
+					header:new sap.m.Text({text:"Transactiontype"})
+				})
+				
+			],
+			
+			items:{
+				 path: "Users>/TransactionHistory",
+	               
+                 factory: function(sIdx, oContxt) {
+                     debugger;
+                     return new sap.m.ColumnListItem({
+                        cells:[
+
+                     	   new sap.m.Text({text: "{Users>from}" }),
+                     	   new sap.m.Text({text: "{Users>to}" }),
+                     	   new sap.m.Text({text: "{Users>type}" }),
+                     	   new sap.m.Text({text: "{Users>Amount}" }),
+                     	   new sap.m.Text({text: "{Users>Balance}" }),
+                     	   new sap.m.Text({text: "{Users>Transdate}" }),
+                     	   new sap.m.Text({text: "{Users>Transtime}" }),
+                     	  new sap.m.Text({text: "{Users>Transactiontype}" })
+                     	   
+                        ]
+                     })
+                 }	
+				
+				}	
+				
+		})
+		
  		return new sap.m.Page({
 			title: "TransactionHistory",
-			subHeader:new sap.m.Bar({
-				contentLeft:[
-					new sap.m.Button({text:"",
-						icon:"sap-icon://nav-back",
-						press:()=>{
-						oController.navigate();
-						}
-					})
-					]
-				}),
+			showNavButton:true,
+			navButtonPress: () => {
+				var router = sap.ui.core.UIComponent.getRouterFor(this);
+				router.navTo("details");
+			},
 			content: [
-			
+			oView.oTable1
 			]
 		});
 	}

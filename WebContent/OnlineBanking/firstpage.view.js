@@ -36,7 +36,6 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 		});
 		oView.setModel(oModel2,"MyInfo");
  		
-		
 		let  oModel7 = oController.getOwnerComponent().getModel("users");
 		
 		let CreateUserModel = new sap.ui.model.json.JSONModel({
@@ -65,7 +64,6 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 			type:sap.m.InputType.Number,
 			value: "{Users1>/createUser/DOB}"});
 		
-
 		oView.d = new sap.m.Input({width	:"250px",
 			type:sap.m.InputType.Text,
 			value: "{Users1>/createUser/Country}"});
@@ -134,8 +132,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 					        	 label:"customerId",
 					             fields:[oView.g]
 					         }),
-					
-					
+						
 							new sap.ui.layout.form.FormElement({
 								label:"Name",
 								fields:[oView.a]	

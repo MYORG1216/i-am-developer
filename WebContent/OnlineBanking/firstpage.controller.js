@@ -31,8 +31,8 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 			})
 		}
 		
-		 oModel3.setProperty("/data/scustomerId","");
-		 oModel3.setProperty("/data/sPassword","");
+		 oModel3.setProperty("/data/customerId","");
+		 oModel3.setProperty("/data/Password","");
 	},
 		
 	navi : function(){

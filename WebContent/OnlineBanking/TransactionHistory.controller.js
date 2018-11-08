@@ -9,10 +9,7 @@ sap.ui.controller("banking.OnlineBanking.TransactionHistory", {
 //
 //	},
 
-	navigate(){
-		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("details");
-	}
+	
 	
 	
 /**
