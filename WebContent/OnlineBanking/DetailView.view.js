@@ -30,30 +30,30 @@ sap.ui.jsview("banking.OnlineBanking.DetailView", {
 		});
 	},
 
-	View.createEnhHeaderPanel()
-	{
-	let View = this,
-	oController = View.getController();
-View.UserHeader = new sap.m.ObjectHeader({
-	title: "{Users>/AccountInfo/name}",
-	number: "{Users>/AccountInfo/domain}",
-	attributes:[,
-		new sap.m.ObjectAttribute({
-			title: Bundle.getText("customerId"),
-			text: "{Users>/AccountInfo/customerId}"
-		}),
-		new sap.m.ObjectAttribute({
-			title: Bundle.getText("accountno"),
-			text: "{Users>/AccountInfo/accountno}"
-		}),
-		new sap.m.ObjectAttribute({
-			title: Bundle.getText("name"),
-			text: "{Users>/AccountInfo/name}"
-		})
-	]
+//	View.createEnhHeaderPanel()
+//	{
+//	let View = this,
+//	oController = View.getController();
+//View.UserHeader = new sap.m.ObjectHeader({
+//	title: "{Users>/AccountInfo/name}",
+//	number: "{Users>/AccountInfo/domain}",
+//	attributes:[,
+//		new sap.m.ObjectAttribute({
+//			title: Bundle.getText("customerId"),
+//			text: "{Users>/AccountInfo/customerId}"
+//		}),
+//		new sap.m.ObjectAttribute({
+//			title: Bundle.getText("accountno"),
+//			text: "{Users>/AccountInfo/accountno}"
+//		}),
+//		new sap.m.ObjectAttribute({
+//			title: Bundle.getText("mobileno"),
+//			text: "{Users>/AccountInfo/mobileno}"
+//		})
+//	],
 //	statuses: [
 //		new sap.m.ObjectStatus({
-//			title: Bundle.getText("Country"),
+//			title: Bundle.getText(""),
 //			text: "{Users>/AccountInfo/Country}"
 //		}),
 //		new sap.m.ObjectStatus({
@@ -61,9 +61,9 @@ View.UserHeader = new sap.m.ObjectHeader({
 //			text: "{Users>/AccountInfo/Services}"
 //		})
 //	]
-});
-	
-}	
+//});
+//	
+//}	
 	
 	
 });

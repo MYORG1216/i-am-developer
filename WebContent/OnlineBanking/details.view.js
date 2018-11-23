@@ -7,13 +7,16 @@ sap.ui.jsview("banking.OnlineBanking.details", {
 	getControllerName : function() {
 		return "banking.OnlineBanking.details";
 	},
+	oInit: function(){
+		new sap.ui.getCore().getEventBus().subscribe("customerData", this.fnResponse ,this);
+	},
 
 	/** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. 
 	* Since the Controller is given to this method, its event handlers can be attached right away. 
 	* @memberOf OnlineBanking.details
 	*/ 
 	createContent : function(oController) {
- 	
+ 	let oView = this;
 		return new sap.m.Page({
 			title:"Details",
 			showNavButton:true,
@@ -30,7 +33,7 @@ sap.ui.jsview("banking.OnlineBanking.details", {
 		 			headerImage:"sap-icon://account",
 		 			subheader:"50%",
 		 				press:function(){
-		 					oController.navi1();
+		 					oController.navi1(oView.id);
 		 				}
 		 		}),
 		 		

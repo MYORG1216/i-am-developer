@@ -19,20 +19,18 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 	 * @memberOf OnlineBanking.firstpage
 	 */ 
 	createContent : function(oController) {
-		debugger;
+		
  		let oView = this;
- 		
- 		
 		oController = oView.getController();
-		let oModel1 = oController.getOwnerComponent().getModel("Users");
-		debugger;
+//		let oModel1 = oController.getOwnerComponent().getModel("Users");
+		
 		let oModel2 = new sap.ui.model.json.JSONModel({
 			"data":{
 				"customerId":"",
 				"Password":""
 			},
 			"loginbutton":true,
-		   // "submitbutton":true   
+		   // "submitbutton":true
 		});
 		oView.setModel(oModel2,"MyInfo");
  		
@@ -50,7 +48,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 				"Country":""
 			}
 		});
-		oView.setModel(CreateUserModel,"Users1");
+		oView.setModel("Users1",CreateUserModel);
 		let Locale = sap.ui.getCore().setModel(CreateUserModel,"Users1");
 		oView.a = new sap.m.Input({width:"250px", 
 			type:sap.m.InputType.Text,
@@ -227,7 +225,47 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 							text:"submit",
 							width:"100px",
 							press:()=>{
-								oController.validate();
+								
+								var oModel3 = oView.getModel("MyInfo");
+								var oModel4 = oView.getModel("Users");
+								var odata = oModel3.getProperty("/data");
+								 oConfig = {
+										 CsCustomer:{ 
+											 Customer: {
+											 CustId : odata.customerId,
+											 Password : odata.Password 
+										 }
+								 }
+										
+								 };
+								oController.callServer(oConfig).then((response)=>{
+									debugger
+									let oModel = oController.getOwnerComponent().getModel("Users");
+									
+									if(oModel){
+										oModel.setProperty("/customer", response.CsCustomer);
+									}
+									
+									if (response.CsCustomer.Customer.Name === "No customer"){
+
+//										mess-strip										
+									}
+									else{
+										oController.navi();
+									}
+									
+								
+									
+								});
+								 
+								 
+//								 oController.backendCall(oConfig,
+//										 (oResponse)=>{
+//											 debugger;
+//										 },
+//										 (oError)=>{
+//											 debugger;
+//										 });
 							}
 						}),
 						new sap.m.Button({

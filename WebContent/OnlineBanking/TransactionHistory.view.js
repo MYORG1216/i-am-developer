@@ -14,9 +14,9 @@ sap.ui.jsview("banking.OnlineBanking.TransactionHistory", {
 	*/ 
 	createContent : function(oController) {
 		let oView = this;
-	     let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
-	     this.setModel(oModel, "Users");
-		
+	     //let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
+	    let oModel = oController.getOwnerComponent().getModel("Users"); 
+		this.setModel(oModel, "Users");
 		
 		oView.oTable1 = new sap.m.Table
 		({

@@ -5,13 +5,15 @@ sap.ui.controller("banking.OnlineBanking.details", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf OnlineBanking.details
 */
+
 	
-	
-	
-	
-	navi1(){
+	navi1(cstmId){
+		debugger;
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("AccountInfo");
+		let oCustomer = this.getOwnerComponent().getModel("Users").getProperty("/customer");
+		//router.navTo("AccountInfo",{"custId":this.getView().id });
+		
+		router.navTo("AccountInfo",{"custId": oCustomer.Customer.CustId});
 	},
 	
 	navi2(){
@@ -27,10 +29,26 @@ sap.ui.controller("banking.OnlineBanking.details", {
 	navi4(){
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("ActiveUsers");
-	}
-//	onInit: function() {
-//
-//	},
+	},
+	onInit: function() {
+
+//		var router = sap.ui.core.UIComponent.getRouterFor(this);
+//		onRouteMatched = (oEvt)=>{    
+//		
+//			this.getView().id = oEvt.getParameter("arguments").customerData;
+//		
+//		};
+//		
+//		
+//		router.attachRouteMatched("details/{customerData}", onRouteMatched);
+//		new sap.ui.getCore().getEventBus().subscribe("customerData", this.fnResponse ,this);
+
+	},
+	
+//	fnResponse :(oResponse)=>{
+//		
+//		this.getView().response = oResponse;
+//	}
 
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

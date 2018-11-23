@@ -8,10 +8,49 @@ sap.ui.controller("banking.OnlineBanking.AccountInfo", {
 //	onInit: function() {
 //
 //	},
+	
+onInit: function() {
+		debugger
+//		var currentcustomer;
+//		let oController = this;
+//		
+//		var router = sap.ui.core.UIComponent.getRouterFor(this);
+//		onRouteMatched = (oEvt)=>{    
+//			debugger;
+//			this.getView().currentcustomer = oEvt.getParameter("arguments").customerId;
+//			oController.performListActions(this.getView().currentcustomer)
+//		};
+//		
+//		router.attachRouteMatched("AccountInfo/{customerId}", onRouteMatched);
+//		},
+//			
+//			performListActions(currentcustomer) {	
+//		let oController = this;
+//			oView = oController.getView();
+//			oView.presentUser = currentcustomer;
+//			oTable= oView.oTable;  
+//
+//			
+//		let oBinding = oTable.getBinding("items");
+//	  if(oBinding) {
+//			oBinding.filter([
+//	  new sap.ui.model.Filter({
+//			filters:[
+//				new sap.ui.model.Filter(
+//					"customerId", 
+//					sap.ui.model.FilterOperator.EQ,
+//					currentcustomer
+//					)			
+//		    ] 
+//		})
+//	  ]);
+//	  }
+	},
+	
 	navi:function(){
 		
-		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("DetailView");
+//		var router = sap.ui.core.UIComponent.getRouterFor(this);
+//		router.navTo("DetailView");
 	}
 	
 	

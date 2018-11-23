@@ -20,71 +20,72 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 	 */ 
 	createContent : function(oController) {
 		 let oView = this;
-	     let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
+	    // let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
+		let oModel = oController.getOwnerComponent().getModel("Users");
+		//router.navTo("details",{"custId":oCustomer.CsCustomer.Customer.CustId});
+		
 	     debugger;
-	     this.setModel(oModel, "Users");
-	   oView.oTable = new sap.m.Table
-		({
-			
-			columns:[
-				
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Customer Id"})
-				}),
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Account No"})
-				}),
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Name"})
-				}),
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Mobileno"})
-				}),
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Branch"})
-				}),
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Branchcode"})
-				}),
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Pin"})
-				}),
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Language"})
-				}),
-				new sap.m.Column({
-					header:new sap.m.Text({text:"Status"})
-				})
-			],
-			
+	     this.setModel(oModel,"Users");
+	   oView.oTable = new sap.m.Table({
+			mode: sap.m.ListMode.SingleSelectMaster,
 				items: {
-                    path: "Users>/Accountdetails",
-                   // templateShareable: true,
+                    path: "Users>/customer/Account",
+                  //  templateShareable: true,
                     factory: function(sIdx, oContxt) {
-                        debugger;
                         return new sap.m.ColumnListItem({
                         	type: sap.m.ListType.Navigation,
-                        	press:(oEvt)=>{
-                        	oController.navi();
-                        	},
+//                        	press:(oEvt)=>{
+//                        	oController.navi();
+//                        	},
                            cells:[
-//                        	   new sap.m.Text({text: "{Users>generateId" }),
-                        	   new sap.m.Text({text: "{Users>customerId}" }),
-                        	   new sap.m.Text({text: "{Users>accountno}" }),
-                        	   new sap.m.Text({text: "{Users>name}" }),
-                        	   new sap.m.Text({text: "{Users>mobileno}" }),
-                        	   new sap.m.Text({text: "{Users>branch}" }),
-                        	   new sap.m.Text({text: "{Users>branchcode}" }),
-                        	   new sap.m.Text({text: "{Users>pin}" }),
-                        	   new sap.m.Text({text: "{Users>language}" }),
-                        	   new sap.m.Text({text: "{Users>status}" })
-                        	   
+                        	   new sap.m.Text({text: "{Users>CustId}" }),
+                        	   new sap.m.Text({text: "{Users>GenId}" }),
+                        	   new sap.m.Text({text: "{Users>AccNo}" }),
+                        	   new sap.m.Text({text: "{Users>Name}" }),
+                        	   new sap.m.Text({text: "{Users>Mobileno}" }),
+                        	   new sap.m.Text({text: "{Users>Branch}" }),
+                        	   new sap.m.Text({text: "{Users>Branchcode}" }),
+                        	   new sap.m.Text({text: "{Users>Pin}" }),
+                        	   new sap.m.Text({text: "{Users>Language}" }),
+                        	   new sap.m.Text({text: "{Users>Status}" })
                            ]
                         
                         })
                     }
-                }
-		})
+                },
+                columns:[		
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Customer Id"})
+    				}),
+    				new sap.m.Column({
+    					header:[new sap.m.Text({text:"Gen Id"})]
+    				}),
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Account No"})
+    				}),
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Name"})
+    				}),
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Mobileno"})
+    				}),
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Branch"})
+    				}),
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Branchcode"})
+    				}),
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Pin"})
+    				}),
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Language"})
+    				}),
+    				new sap.m.Column({
+    					header:new sap.m.Text({text:"Status"})
+    				})
+    			]
+		});
 			
 //	   oView.oTable.bindItems("Users>/Accountdetails",
 //			   new sap.m.ColumnListItem({
@@ -102,7 +103,7 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 //           ]
 //        }))
  		return new sap.m.Page({
-			title: "AccountInfo",
+			title: "Account Info",
 			showNavButton:true,
 			navButtonPress: () => {
 			

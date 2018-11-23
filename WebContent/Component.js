@@ -21,13 +21,13 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 			},
 			
 			{
-				"pattern" : "details",
+				"pattern" : "details/{custId}",
 				"name" : "details",
 				"target" : "details"	
 			},
 			
 			{
-				"pattern" : "AccountInfo",
+				"pattern" : "AccountInfo/{custId}",
 				"name" : "AccountInfo",
 				"target" : "AccountInfo"
 			},
@@ -95,22 +95,20 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 	},
 
 	init : function() {
-		debugger;
+	
 //		let Data = new sap.ui.model.json.JSONModel({
 //			
 //				
 //		});
-		
-		
-		let Model = new sap.ui.model.json.JSONModel();
-		Model.loadData("JSON/Users.json");
-		this.setModel(Model, "Users");
-		
-		
-		
 
 		let Locale = sap.ui.getCore().getConfiguration().getLanguage();
 		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
+
 		this.getRouter().initialize();
+		
+		let Model = new sap.ui.model.json.JSONModel();
+		//Model.loadData("JSON/Users.json");
+		this.setModel(Model,"Users");
+			
 	}
 });
