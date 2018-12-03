@@ -9,7 +9,18 @@ sap.ui.controller("banking.OnlineBanking.ActiveUsers", {
 //
 //	},
 
+     box1()
+	{
+		jQuery.sap.require("sap.m.MessageBox");
+		sap.m.MessageBox.error("The record does not exist", {
+			title:"Error Msg"
+		})
+	},
 	
+	dialog2()
+	{
+		
+	}
 	
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

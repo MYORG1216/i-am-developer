@@ -42,7 +42,6 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		let oModel = this.getView().getModel("Users");
 		let oCustomer = oModel.getProperty("/customer");
 		router.navTo("details",{"custId":oCustomer.Customer.CustId});
-	
 	},
 
 	navi1:function(){	
@@ -141,11 +140,11 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 	
 	
 	callServer:(oOptions)=>{
-		
+		debugger;
 	let oConfig = {
 		    url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
 		    method: "POST",
-		    data:JSON.stringify(oOptions) ,
+		    data:JSON.stringify(oOptions),
 		    dataType: "json",
 		    contentType: "text/plain"
 //		    crossDomain: true
@@ -203,7 +202,6 @@ backendCall(oOptions,fnSuccess, fnReject){
 //	    	fnReject(JSON.parse(xhttp.response))
 //	    })
 }
-
 
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

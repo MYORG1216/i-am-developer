@@ -12,23 +12,25 @@ sap.ui.controller("banking.OnlineBanking.details", {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		let oCustomer = this.getOwnerComponent().getModel("Users").getProperty("/customer");
 		//router.navTo("AccountInfo",{"custId":this.getView().id });
-		
 		router.navTo("AccountInfo",{"custId": oCustomer.Customer.CustId});
 	},
 	
 	navi2(){
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("Newtrans");
+		let oCustomer = this.getOwnerComponent().getModel("Users").getProperty("/customer");
+		router.navTo("Newtrans",{"custId": oCustomer.Customer.CustId});
 	},
 	
 	navi3(){
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("TransactionHistory");
+		let oCustomer = this.getOwnerComponent().getModel("Users").getProperty("/customer");
+		router.navTo("TransactionHistory",{"custId": oCustomer.Customer.CustId});
 	},
 	
 	navi4(){
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("ActiveUsers");
+		let oCustomer = this.getOwnerComponent().getModel("Users").getProperty("/customer");
+		router.navTo("ActiveUsers",{"custId": oCustomer.Customer.CustId});
 	},
 	onInit: function() {
 
@@ -45,11 +47,98 @@ sap.ui.controller("banking.OnlineBanking.details", {
 
 	},
 	
-//	fnResponse :(oResponse)=>{
-//		
-//		this.getView().response = oResponse;
-//	}
+	callServer1:(oOptions)=>{
+		debugger;
+	let oConfig = {
+		    url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_ACNT_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
+		    method: "POST",
+		    data:JSON.stringify(oOptions) ,
+		    dataType: "json",
+		    contentType: "text/plain"
 
+		};            		
+		
+    let oDeferred = jQuery.Deferred();
+
+	jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
+		
+		 oDeferred.resolve(response);
+	 })
+	 .fail(function(response, status, xhr, cfg)  {
+		 
+	        oDeferred.reject(response);
+	 })
+    .always(function(response, status, xhr, cfg) {
+    	
+        sap.ui.core.BusyIndicator.hide();
+    });     		    	
+	
+	return oDeferred.promise();
+},
+
+callServer2:(oOptions)=>{
+	debugger;
+let oConfig = {
+	    url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_TRNSHSTRY_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
+	    method: "POST",
+	    data:JSON.stringify(oOptions),
+	    dataType: "json",
+	    contentType: "text/plain"
+
+	};            		
+	
+let oDeferred = jQuery.Deferred();
+
+jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
+	
+	 oDeferred.resolve(response);
+ })
+ .fail(function(response, status, xhr, cfg)  {
+	 
+        oDeferred.reject(response);
+ })
+.always(function(response, status, xhr, cfg) {
+	
+    sap.ui.core.BusyIndicator.hide();
+});     		    	
+
+return oDeferred.promise();
+},
+
+callServer3:(oOptions)=>{
+	debugger;
+let oConfig = {
+	    url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_ACTUSRS_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
+	    method: "POST",
+	    data:JSON.stringify(oOptions),
+	    dataType: "json",
+	    contentType: "text/plain"
+
+	};            		
+	
+let oDeferred = jQuery.Deferred();
+
+jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
+	
+	 oDeferred.resolve(response);
+ })
+ .fail(function(response, status, xhr, cfg)  {
+	 
+        oDeferred.reject(response);
+ })
+.always(function(response, status, xhr, cfg) {
+	
+    sap.ui.core.BusyIndicator.hide();
+});     		    	
+
+return oDeferred.promise();
+},
+
+navi( )
+{
+	 var router = sap.ui.core.UIComponent.getRouterFor(this);
+		router.navTo("firstpage");
+}
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 * (NOT before the first rendering! onInit() is used for that one!).

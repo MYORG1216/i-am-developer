@@ -24,7 +24,7 @@ sap.ui.jsview("banking.OnlineBanking.TransactionHistory", {
 			columns:[
 				
 				new sap.m.Column({
-					header:new sap.m.Text({text:"From"})
+					header:new sap.m.Text({text:"from"})
 				}),
 				new sap.m.Column({
 					header:new sap.m.Text({text:"To"})
@@ -39,33 +39,33 @@ sap.ui.jsview("banking.OnlineBanking.TransactionHistory", {
 					header:new sap.m.Text({text:"Balance"})
 				}),
 				new sap.m.Column({
-					header:new sap.m.Text({text:"Transdate"})
+					header:new sap.m.Text({text:"Transaction date"})
 				}),
 				new sap.m.Column({
-					header:new sap.m.Text({text:"Transtime"})
+					header:new sap.m.Text({text:"Transaction time"})
 				}),
 				new sap.m.Column({
-					header:new sap.m.Text({text:"Transactiontype"})
+					header:new sap.m.Text({text:"Transaction type"})
 				})
 				
 			],
 			
 			items:{
-				 path: "Users>/TransactionHistory",
-	               
+				// path: "Users>/TransactionHistory",
+	              path:"Users>/customer/Transactions" ,
                  factory: function(sIdx, oContxt) {
                      debugger;
                      return new sap.m.ColumnListItem({
                         cells:[
 
-                     	   new sap.m.Text({text: "{Users>from}" }),
-                     	   new sap.m.Text({text: "{Users>to}" }),
-                     	   new sap.m.Text({text: "{Users>type}" }),
+                     	   new sap.m.Text({text: "{Users>Fromt}" }),
+                     	   new sap.m.Text({text: "{Users>Tot}" }),
+                     	   new sap.m.Text({text: "{Users>Type}" }),
                      	   new sap.m.Text({text: "{Users>Amount}" }),
                      	   new sap.m.Text({text: "{Users>Balance}" }),
-                     	   new sap.m.Text({text: "{Users>Transdate}" }),
-                     	   new sap.m.Text({text: "{Users>Transtime}" }),
-                     	  new sap.m.Text({text: "{Users>Transactiontype}" })
+                     	   new sap.m.Text({text: "{Users>Trsdate}" }),
+                     	   new sap.m.Text({text: "{Users>Trstime}" }),
+                     	  new sap.m.Text({text: "{Users>Trstype}" })
                      	   
                         ]
                      })
@@ -80,7 +80,9 @@ sap.ui.jsview("banking.OnlineBanking.TransactionHistory", {
 			showNavButton:true,
 			navButtonPress: () => {
 				var router = sap.ui.core.UIComponent.getRouterFor(this);
-				router.navTo("details");
+				//router.navTo("details");
+				//router.navTo("details",{"custId": oCustomer.Customer.CustId});
+				router.navBack();
 			},
 			content: [
 			oView.oTable1

@@ -28,7 +28,22 @@
 			 new sap.ui.core.ComponentContainer({
 				name:"banking"
 			}).placeAt("content");});
-		</script> 
+		</script>
+
+		<style>
+				 .Styling.sapUiFormM:not(.sapUiFormEdit)>.sapUiFormResGrid>div:not(.sapMTB) {
+					 padding-bottom: 0.25rem;
+					 padding-top: 0.25rem;
+				 }
+
+			.Styling.sapUiFormM:not(.sapUiFormEdit) .sapUiRespGridMedia-Std-Phone.sapUiFormResGridCont>.sapUiFormElementLbl.sapUiRespGridSpanS12,
+			.sapUiFormM:not(.sapUiFormEdit) .sapUiRespGridMedia-Std-Tablet.sapUiFormResGridCont>.sapUiFormElementLbl.sapUiRespGridSpanM12,
+			.sapUiFormM:not(.sapUiFormEdit) .sapUiRespGridMedia-Std-Desktop.sapUiFormResGridCont>.sapUiFormElementLbl.sapUiRespGridSpanL12,
+			.sapUiFormM:not(.sapUiFormEdit) .sapUiRespGridMedia-Std-LargeDesktop.sapUiFormResGridCont>.sapUiFormElementLbl.sapUiRespGridSpanXL12 {
+                    padding-top: 0.25rem;
+			}
+
+		</style>
 
 	</head>
 	<body class="sapUiBody" role="application">

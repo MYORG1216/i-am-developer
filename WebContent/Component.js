@@ -16,43 +16,44 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 			},
 			"routes" : [ {
 				"pattern" : "",
-				"name" : "first",
+				"name" : "firstpage",
 				"target" : "firstpage"
 			},
 			
 			{
-				"pattern" : "details/{custId}",
+				"pattern" : "home/{custId}",
 				"name" : "details",
 				"target" : "details"	
 			},
 			
 			{
-				"pattern" : "AccountInfo/{custId}",
+				"pattern" : "Accounts/{custId}",
 				"name" : "AccountInfo",
 				"target" : "AccountInfo"
 			},
 			
 			{
-				"pattern" : "Newtrans",
+				"pattern" : "Newtrans/{custId}",
 				"name" : "Newtrans",
 				"target" : "Newtrans"	
 			},
 			
 			{
-				"pattern" : "TransactionHistory",
+				"pattern" : "TransactionHistory/{custId}",
 				"name" : "TransactionHistory",
 				"target" : "TransactionHistory"
 			},
 			
 			{
-				"pattern" : "ActiveUsers",
+				"pattern" : "ActiveUsers/{custId}",
 				"name" : "ActiveUsers",
 				"target" : "ActiveUsers"
 			},
 			{
-				"pattern" : "DetailView",
-				"name" : "DetailView",
-				"target" : "DetailView"
+//				"pattern" : "AccountInfo/{custId}/{accountId}",
+				"pattern" : "AccountInfo/{custId}/{accountId}",
+				"name" : "totalInfo",
+				"target" : "totalInfo"
 			}
 			],
 			"targets" : {
@@ -84,9 +85,9 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 					"viewName" : "ActiveUsers",
 					"controlAggregation" : "pages"
 				},
-				"DetailView" : {
-					"viewName" : "DetailView",
-					"controlAggregation" : "pages"
+				"totalInfo" : {
+					"viewName" : "totalInfo",
+					"controlAggregation" : "totalInfo"
 					
 				}
 				
@@ -101,14 +102,23 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 //				
 //		});
 
-		let Locale = sap.ui.getCore().getConfiguration().getLanguage();
+	//	let Locale = sap.ui.getCore().getConfiguration().getLanguage();
+		
+		
+		
 		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
 
 		this.getRouter().initialize();
+		
+		this.getRouter().navBack = function(){
+			history.back(-1)
+		}
 		
 		let Model = new sap.ui.model.json.JSONModel();
 		//Model.loadData("JSON/Users.json");
 		this.setModel(Model,"Users");
 			
+		let Model1 = new sap.ui.model.json.JSONModel();
+		this.setModel(Model,"MyInfo");
 	}
 });

@@ -48,9 +48,10 @@ onInit: function() {
 	},
 	
 	navi:function(){
-		
-//		var router = sap.ui.core.UIComponent.getRouterFor(this);
-//		router.navTo("DetailView");
+		debugger
+		var router = sap.ui.core.UIComponent.getRouterFor(this);
+		let oCustomer = this.getOwnerComponent().getModel("Users").getProperty("/customer");
+		router.navTo("totalInfo",{"custId": oCustomer.Customer.CustId});
 	}
 	
 	

@@ -19,24 +19,25 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 	 * @memberOf OnlineBanking.AccountInfo
 	 */ 
 	createContent : function(oController) {
-		 let oView = this;
+		let oView = this;
 	    // let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
 		let oModel = oController.getOwnerComponent().getModel("Users");
 		//router.navTo("details",{"custId":oCustomer.CsCustomer.Customer.CustId});
-		
 	     debugger;
 	     this.setModel(oModel,"Users");
-	   oView.oTable = new sap.m.Table({
-			mode: sap.m.ListMode.SingleSelectMaster,
+	    oView.oTable = new sap.m.Table({
+			//mode: sap.m.ListMode.SingleSelectMaster,
 				items: {
-                    path: "Users>/customer/Account",
+					path:"Users>/customer/Accounts",
+                  //  path: "Users>/customer/Account",  
                   //  templateShareable: true,
                     factory: function(sIdx, oContxt) {
                         return new sap.m.ColumnListItem({
-                        	type: sap.m.ListType.Navigation,
-//                        	press:(oEvt)=>{
-//                        	oController.navi();
-//                        	},
+                       	type: sap.m.ListType.Navigation,
+                        	press:(oEvt)=>{
+                        		debugger
+                        	oController.navi();
+                        	},
                            cells:[
                         	   new sap.m.Text({text: "{Users>CustId}" }),
                         	   new sap.m.Text({text: "{Users>GenId}" }),
@@ -49,7 +50,6 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                         	   new sap.m.Text({text: "{Users>Language}" }),
                         	   new sap.m.Text({text: "{Users>Status}" })
                            ]
-                        
                         })
                     }
                 },
@@ -58,7 +58,7 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
     					header:new sap.m.Text({text:"Customer Id"})
     				}),
     				new sap.m.Column({
-    					header:[new sap.m.Text({text:"Gen Id"})]
+    					header:new sap.m.Text({text:"Gen Id"})
     				}),
     				new sap.m.Column({
     					header:new sap.m.Text({text:"Account No"})
@@ -67,13 +67,13 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
     					header:new sap.m.Text({text:"Name"})
     				}),
     				new sap.m.Column({
-    					header:new sap.m.Text({text:"Mobileno"})
+    					header:new sap.m.Text({text:"Mobile no"})
     				}),
     				new sap.m.Column({
     					header:new sap.m.Text({text:"Branch"})
     				}),
     				new sap.m.Column({
-    					header:new sap.m.Text({text:"Branchcode"})
+    					header:new sap.m.Text({text:"Branch code"})
     				}),
     				new sap.m.Column({
     					header:new sap.m.Text({text:"Pin"})
@@ -84,13 +84,18 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
     				new sap.m.Column({
     					header:new sap.m.Text({text:"Status"})
     				})
-    			]
+    			],
+//    			select :(oEvt)=>{
+//    				debugger;
+//    				oController.navi();
+//    				
+//    			}
 		});
 			
 //	   oView.oTable.bindItems("Users>/Accountdetails",
 //			   new sap.m.ColumnListItem({
 //				   cells:[
-////			  	new sap.m.Text({text: "{Users>generateId" }),
+////			new sap.m.Text({text: "{Users>generateId" }),
 //			   	new sap.m.Text({text: "{Users>customerId}" }),
 //			   	new sap.m.Text({text: "{Users>accountno}"}),
 //	        	new sap.m.Text({text: "{Users>name}" }),
@@ -108,7 +113,9 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 			navButtonPress: () => {
 			
 				var router = sap.ui.core.UIComponent.getRouterFor(this);
-				router.navTo("details");
+				router.navBack();
+				//router.navTo("details",{"custId": oCustomer.Customer.CustId});	
+				//router.navTo("details",custId);
 			},
 			
 			content: [

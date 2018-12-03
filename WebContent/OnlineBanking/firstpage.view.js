@@ -1,26 +1,15 @@
 sap.ui.jsview("banking.OnlineBanking.firstpage", {
 
-	/**
-	 * Specifies the Controller belonging to this View. In the case that it is
-	 * not implemented, or that "null" is returned, this View does not have a
-	 * Controller.
-	 * 
-	 * @memberOf OnlineBanking.firstpage
-	 */ 
+	
 	getControllerName : function() {
 		return "banking.OnlineBanking.firstpage";
 	},
 
-	/**
-	 * Is initially called once after the Controller has been instantiated. It
-	 * is the place where the UI is constructed. Since the Controller is given
-	 * to this method, its event handlers can be attached right away.
-	 * 
-	 * @memberOf OnlineBanking.firstpage
-	 */ 
+	
 	createContent : function(oController) {
 		
  		let oView = this;
+ 	
 		oController = oView.getController();
 //		let oModel1 = oController.getOwnerComponent().getModel("Users");
 		
@@ -30,12 +19,13 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 				"Password":""
 			},
 			"loginbutton":true,
+			"register" :false,
 		   // "submitbutton":true
 		});
 		oView.setModel(oModel2,"MyInfo");
  		
 		let  oModel7 = oController.getOwnerComponent().getModel("users");
-		
+        jQuery.sap.require("sap.m.MessageBox");
 		let CreateUserModel = new sap.ui.model.json.JSONModel({
 			"createUser":{
 		         "customerId":"",
@@ -62,7 +52,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 			type:sap.m.InputType.Number,
 			value: "{Users1>/createUser/DOB}"});
 		
-		oView.d = new sap.m.Input({width	:"250px",
+		oView.d = new sap.m.Input({width:"250px",
 			type:sap.m.InputType.Text,
 			value: "{Users1>/createUser/Country}"});
 		
@@ -81,6 +71,8 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 			value:"{Users1>/createUser/customerId}"
 		});
 		
+		
+		
 		 oView.oForm = new sap.ui.layout.form.Form({
 			 visible: 
 			 {
@@ -89,13 +81,14 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 				 return bValue === false ? false: true;
 				 }
 			 },
+			 
 	    	title:new sap.ui.core.Title({ text: "ONLINE BANKING SERVICES"}),
 			layout:new sap.ui.layout.form.ResponsiveGridLayout({}),
 				formContainers:[
 					new sap.ui.layout.form.FormContainer({
 						formElements:[
 							new sap.ui.layout.form.FormElement({
-							label:"customerId",
+							label:"Customer Id",
 					        fields:[ new sap.m.Input({width:"100px",
 					    	type:sap.m.InputType.customerId,
 					    	value:"{MyInfo>/data/customerId}"
@@ -118,8 +111,9 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 	    	{
 	    		path : 'MyInfo>/loginbutton',
 	    		formatter :(bValue)	=>	{
-	    			return bValue === false ? true : false;
+	    		return bValue === false ? true : false;
 	    		}
+
 	    	},
 	    	title:new sap.ui.core.Title({ text:"User Info"}),
 			layout:new sap.ui.layout.form.ResponsiveGridLayout({}),
@@ -127,7 +121,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 			new sap.ui.layout.form.FormContainer({
 				formElements:[
 					         new sap.ui.layout.form.FormElement({
-					        	 label:"customerId",
+					        	 label:"CustomerId",
 					             fields:[oView.g]
 					         }),
 						
@@ -142,7 +136,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 							}),	
 							
 							new sap.ui.layout.form.FormElement({
-								label:"RePwd",
+								label:"Retype Pwd",
 							    fields:[oView.f]
 							}),	
 									
@@ -163,54 +157,120 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 						new sap.ui.layout.form.FormElement({
 							label:"Country",
 							fields:[oView.d]	
-							}),
-							new sap.ui.layout.form.FormElement({
-								label:"",
-								fields:[
-								new sap.m.Button({width:"150px",
-									text:"submit",
-									width:"100px",
-									press:()=>{
-						    			oController.navi1();
-						    		}
-								})
-								]	
-								}),
+							})
+//							new sap.ui.layout.form.FormElement({
+//								label:"",
+//								fields:[
+//								new sap.m.Button({width:"150px",
+//									text:"submit",
+//									width:"100px",
+//									press:()=>{
+//						    			oController.navi1();
+//						    		}
+//								})
+//								]	
+//								}),
 			           ]	
 							})
 						]
-					})
+					}).addStyleClass("Styling");
 	
-			return new sap.m.Page({
-				title: "AXIS ONLINE BANKING SERVICES",
-			content: [
+		            oView.page =  new sap.m.Page({
+				      title: "AXIS ONLINE BANKING SERVICES",
 				
-				new sap.m.HBox({		
-					items:[
-				new sap.m.SegmentedButton({
-					buttons:[
-						new sap.m.Button({
-							text:"login",
-							width:"100px",
-							press: ()=>{
-								let oModel = oView.getModel("MyInfo");
-								oModel.setProperty("/loginbutton", true);	
+				      customHeader: new sap.m.Bar({
+					
+					   headerContent:[
+						new sap.m.Text({text:"ONLINE BANKING SERVICE" })
+					],
+					
+				         contentRight:[
+//						new sap.m.Toolbar({
+//							
+//							content:[
+//							text:"ONLINE BANKING SERVICE"
+//						]
+//						}),
+						new sap.m.ActionSelect({
+							icon:"sap-icon://pull-down",
+//							buttons:[
+//							new sap.m.Button({
+//								icon:"sap-icon://person-placeholder",
+//								text:"Login",
+////								press: ()=>{
+////									let oModel = oView.getModel("MyInfo");
+////									oModel.setProperty("/loginbutton", true);	
+////								}
+//							}),
+//							new sap.m.Button({
+//								icon:"sap-icon://customer",
+//								text:"NewUser",
+////								  press:()=>{
+////								    	let oModel = oView.getModel("MyInfo");
+////										oModel.setProperty("/loginbutton", false);	
+////								    }
+//							})
+//							],
+							items:[
+								new sap.ui.core.Item({
+									key: "login",
+									text:"Login"
+								}),
+								new sap.ui.core.Item({
+									key: "Register",
+									text:"Register"
+								})
+							],
+							change:(oEvent)=>{
+								debugger;
+								let oSelectedItem = oEvent.getParameter("selectedItem");
+								if(oSelectedItem){
+							    	let oModel = oView.getModel("MyInfo");
+							    	
+								sKey = oSelectedItem.getKey();
+									
+									if(sKey && oModel) {
+										(sKey === "Register") ? oModel.setProperty("/loginbutton", false) :
+										oModel.setProperty("/loginbutton", true);
+									}
+								}
 							}
-				
-						}),
-						new sap.m.Button({
-							text:"NewUser",
-						    width:"100px",
-						    press:()=>{
-						    	let oModel = oView.getModel("MyInfo");
-								oModel.setProperty("/loginbutton", false);	
-						    }
 						})
-						
 					]
-				})
-				]
 				}),
+				
+				busyIndicatorDelay: 1,
+			      content: [
+				new sap.m.VBox({
+					justifyContent: "Center",
+					alignItems: "Center",
+      items: [
+//				new sap.m.HBox({		
+//					items:[
+//				new sap.m.SegmentedButton({
+//					buttons:[
+//						new sap.m.Button({
+//							text:"Login",
+//							width:"100px",
+//							press: ()=>{
+//								let oModel = oView.getModel("MyInfo");
+//								oModel.setProperty("/loginbutton", true);	
+//							}
+//				
+//						}),
+//						new sap.m.Button({
+//							text:"New User",
+//						    width:"100px",
+//						    press:()=>{
+//						    	let oModel = oView.getModel("MyInfo");
+//								oModel.setProperty("/loginbutton", false);	
+//						    }
+//						})
+//						
+//					]
+//				})
+//				]
+//				}),
 				new sap.m.VBox({
 					items:[
 						oView.oForm,
@@ -219,46 +279,55 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 					}),
             	new sap.m.HBox({
 					items:[
-				new sap.m.SegmentedButton({
-					buttons:[
-						new sap.m.Button({
-							text:"submit",
-							width:"100px",
-							press:()=>{
-								
-								var oModel3 = oView.getModel("MyInfo");
-								var oModel4 = oView.getModel("Users");
-								var odata = oModel3.getProperty("/data");
-								 oConfig = {
-										 CsCustomer:{ 
-											 Customer: {
-											 CustId : odata.customerId,
-											 Password : odata.Password 
-										 }
-								 }
+				       new sap.m.SegmentedButton({
+					         buttons:[
+						       new sap.m.Button({
+							     text:"submit",
+							        width:"100px",
+							          press:()=>{
+                                              debugger
+								             var oModel3 = oView.getModel("MyInfo");
+                                              var submit = oView.getModel("MyInfo").getProperty("/loginbutton");
+								             var oModel4 = oView.getModel("Users");
+								             var odata = oModel3.getProperty("/data");
+								               oConfig = {
+										         IsCustomer:{
+											
+											        Customerid : odata.customerId,
+											              Password : odata.Password
+													}
 										
-								 };
-								oController.callServer(oConfig).then((response)=>{
-									debugger
-									let oModel = oController.getOwnerComponent().getModel("Users");
-									
-									if(oModel){
-										oModel.setProperty("/customer", response.CsCustomer);
-									}
-									
-									if (response.CsCustomer.Customer.Name === "No customer"){
+								                  };
+								               oView.page.setBusy(true);
+								               
+								               if(submit === false)
+								            	   {
 
-//										mess-strip										
-									}
-									else{
-										oController.navi();
-									}
-									
-								
-									
-								});
-								 
-								 
+								            	   }
+								               else
+								               	{
+                                                    oController.callServer(oConfig).then((response)=>{
+                                                        debugger
+                                                        oView.page.setBusy(false);
+                                                        let oModel = oController.getOwnerComponent().getModel("Users");
+                                                        debugger
+                                                        if(oModel){
+                                                            oModel.setProperty("/customer", response.CsCustomer);
+                                                        }
+
+                                                        if (response.CsCustomer.Customer.Name === "No customer"){                                                         
+                                                            sap.m.MessageBox.information("No user with these credentials", {
+                                                                title: "Please enter the valid data",
+
+                                                            });
+                                                        }
+                                                        else{
+                                                            oController.navi();
+                                                        }
+                                                    });
+											   }
+
+								 	 
 //								 oController.backendCall(oConfig,
 //										 (oResponse)=>{
 //											 debugger;
@@ -266,24 +335,45 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 //										 (oError)=>{
 //											 debugger;
 //										 });
-							}
-						}),
-						new sap.m.Button({
-							text:"cancel",
-						    width:"100px",
+						    	}
+						      }),
+						      new sap.m.Button({
+							  text:"cancel",
+						      width:"100px",
+                              // showValueHelp:true,
 						    	press:()=>{
-						    		sap.m.MessageBox.error("you clicked cancel button", {
-										title:"Error Msg"
-									})
+							  	debugger
+                                    var oModel3 = oView.getModel("MyInfo")
+							  	   
+                                    var oModel4 = oView.getModel("Users");
+                                    var odata = oModel3.getProperty("/data");
+                                    oConfig = {
+                                        IsCustomer:{
+                                            Customerid : odata.customerId,
+                                            Password : odata.Password
+                                        }
+                                     };
+
+                                       if(oConfig !== null);
+									   {
+                                           oConfig.empty;
+                                           sap.m.MessageBox.error("you clicked cancel button", {
+                                               title:"Error Msg"
+                                           })
+									   }
+
 						    	}
 						})
-						
+
 					]
 				})
 				]
 				})
 	          
-			]
+		 ]
+				})
+				]
 		});
+		return oView.page; 
 	}
 });
