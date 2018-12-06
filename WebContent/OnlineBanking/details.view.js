@@ -52,7 +52,7 @@ sap.ui.jsview("banking.OnlineBanking.details", {
  	});
  	popover = new sap.m.Popover({
  		title:"Customer Details",
- 		placementType:sap.m.PlacementType.Bottom,
+ 		placement:sap.m.PlacementType.Bottom,
  		contentHeight:"100px",
  		contentWidth:"300px",
        // box : popover.box,
@@ -66,7 +66,7 @@ sap.ui.jsview("banking.OnlineBanking.details", {
 //			showHeader:false,
 					
 			customHeader: new sap.m.Bar({
-					contentLeft:[
+					contentRight:[
 						new sap.m.Button({
 						     icon:"sap-icon://person-placeholder", 
 						     press:function(oEvt){
@@ -74,7 +74,7 @@ sap.ui.jsview("banking.OnlineBanking.details", {
 								}
 						})
 					],
-					contentRight:[
+					contentLeft:[
 						new sap.m.Button({
 							icon:"sap-icon://log",
 							 press:function(){

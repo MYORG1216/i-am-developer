@@ -19,7 +19,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 				"Password":""
 			},
 			"loginbutton":true,
-			"register" :false,
+			"register" :false
 		   // "submitbutton":true
 		});
 		oView.setModel(oModel2,"MyInfo");
@@ -38,7 +38,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 				"Country":""
 			}
 		});
-		oView.setModel("Users1",CreateUserModel);
+		oView.setModel(CreateUserModel,"Users1");
 		let Locale = sap.ui.getCore().setModel(CreateUserModel,"Users1");
 		oView.a = new sap.m.Input({width:"250px", 
 			type:sap.m.InputType.Text,
@@ -180,7 +180,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 				
 				      customHeader: new sap.m.Bar({
 					
-					   headerContent:[
+					   contentMiddle:[
 						new sap.m.Text({text:"ONLINE BANKING SERVICE" })
 					],
 					

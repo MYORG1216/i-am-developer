@@ -9,8 +9,8 @@ sap.ui.controller("banking.OnlineBanking.AccountInfo", {
 //
 //	},
 	
-onInit: function() {
-		debugger
+//onInit: function() {
+//		debugger
 //		var currentcustomer;
 //		let oController = this;
 //		
@@ -45,16 +45,46 @@ onInit: function() {
 //		})
 //	  ]);
 //	  }
-	},
-	
-	navi:function(){
+//	},
+
+
+
+    callServer4:(oOptions)=>{
+        debugger;
+        let oConfig = {
+            url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_DEACCNT_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
+            method: "POST",
+            data:JSON.stringify(oOptions),
+            dataType: "json",
+            contentType: "text/plain"
+
+        };
+
+        let oDeferred = jQuery.Deferred();
+
+        jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
+
+            oDeferred.resolve(response);
+        })
+            .fail(function(response, status, xhr, cfg)  {
+
+                oDeferred.reject(response);
+            })
+            .always(function(response, status, xhr, cfg) {
+
+                sap.ui.core.BusyIndicator.hide();
+            });
+
+        return oDeferred.promise();
+    },
+
+	navi:function(selectedAcc){
 		debugger
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		let oCustomer = this.getOwnerComponent().getModel("Users").getProperty("/customer");
-		router.navTo("totalInfo",{"custId": oCustomer.Customer.CustId});
+		router.navTo("totalInfo",{"custId": oCustomer.Customer.CustId, "accountId":selectedAcc.AccNo});
 	}
-	
-	
+		
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 * (NOT before the first rendering! onInit() is used for that one!).

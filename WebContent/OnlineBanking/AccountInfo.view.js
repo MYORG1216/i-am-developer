@@ -35,8 +35,28 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                         return new sap.m.ColumnListItem({
                        	type: sap.m.ListType.Navigation,
                         	press:(oEvt)=>{
-                        		debugger
-                        	oController.navi();
+                        		let selectedAcc = oEvt.getSource().getBindingContext("Users").getObject();
+
+                                let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
+                                let oModel = oController.getOwnerComponent().getModel("Users");
+                                var odata = oModel1.getProperty("/customer/Customer");
+                                oConfig = {
+                                    IsCustomer: {
+                                        Customerid : odata.CustId,
+                                        Password : odata.Password,
+										AccountNo : odata.AccountNo
+                                    }
+                                };
+
+                                oController.callServer4(oConfig).then((response)=>{
+                                    if(oModel){
+                                        oModel.setProperty("/customer/Activ", response.CtActusers);
+                                    }
+                                    else{
+                                        oController.navi();
+                                    }
+                                    oController.navi(selectedAcc);
+                                });
                         	},
                            cells:[
                         	   new sap.m.Text({text: "{Users>CustId}" }),
@@ -113,9 +133,9 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 			navButtonPress: () => {
 			
 				var router = sap.ui.core.UIComponent.getRouterFor(this);
-				router.navBack();
-				//router.navTo("details",{"custId": oCustomer.Customer.CustId});	
-				//router.navTo("details",custId);
+				router.navBack("details");
+//				 router.navTo("details",{"custId": oCustomer.Customer.CustId});
+//				router.navTo("details",custId);
 			},
 			
 			content: [

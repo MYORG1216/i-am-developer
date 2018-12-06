@@ -9,6 +9,13 @@ sap.ui.controller("banking.OnlineBanking.totalInfo", {
 //
 //	},
 
+	navi()
+	{
+	 var router = sap.ui.core.UIComponent.getRouterFor(this);
+	 router.navBack();
+	}
+	
+	
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 * (NOT before the first rendering! onInit() is used for that one!).

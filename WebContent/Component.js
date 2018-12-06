@@ -23,37 +23,43 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 			{
 				"pattern" : "home/{custId}",
 				"name" : "details",
-				"target" : "details"	
+				"target" : "details",
+				"parent": "firstpage"
 			},
 			
 			{
 				"pattern" : "Accounts/{custId}",
 				"name" : "AccountInfo",
-				"target" : "AccountInfo"
+				"target" : "AccountInfo",
+				"parent": "details"
 			},
 			
 			{
 				"pattern" : "Newtrans/{custId}",
 				"name" : "Newtrans",
-				"target" : "Newtrans"	
+				"target" : "Newtrans",
+				"parent": "details"
 			},
 			
 			{
 				"pattern" : "TransactionHistory/{custId}",
 				"name" : "TransactionHistory",
-				"target" : "TransactionHistory"
+				"target" : "TransactionHistory",
+				"parent": "details"
 			},
 			
 			{
 				"pattern" : "ActiveUsers/{custId}",
 				"name" : "ActiveUsers",
-				"target" : "ActiveUsers"
+				"target" : "ActiveUsers",
+				"parent": "details"
 			},
 			{
 //				"pattern" : "AccountInfo/{custId}/{accountId}",
 				"pattern" : "AccountInfo/{custId}/{accountId}",
 				"name" : "totalInfo",
-				"target" : "totalInfo"
+				"target" : "totalInfo",
+					"parent": "AccountInfo"
 			}
 			],
 			"targets" : {
@@ -87,7 +93,7 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 				},
 				"totalInfo" : {
 					"viewName" : "totalInfo",
-					"controlAggregation" : "totalInfo"
+					"controlAggregation" : "pages"
 					
 				}
 				
@@ -110,9 +116,11 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 
 		this.getRouter().initialize();
 		
-		this.getRouter().navBack = function(){
-			history.back(-1)
-		}
+		this.getRouter().navBack = ()=>{
+            this.getRouter();
+            debugger;
+			history.go(-1)
+		};
 		
 		let Model = new sap.ui.model.json.JSONModel();
 		//Model.loadData("JSON/Users.json");
