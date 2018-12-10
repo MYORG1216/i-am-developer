@@ -48,7 +48,7 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		
 		var oView = this.getView();
 		var Core = sap.ui.getCore();
-		var customData = {}  
+		// var customData = {}
 		jQuery.sap.require("sap.m.MessageBox");
 		var myModel = oView.getModel("Users1");
 		oCreateData = myModel.getProperty("/createUser");
@@ -118,7 +118,7 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		{
 		oView.g.setProperty("valueState",sap.ui.core.ValueState.Error);
 		sap.m.MessageBox,error("give scustomerId properly",{
-			title:"Erroe Msg"
+			title:"Error Msg"
 		})
 		}
 		
@@ -135,11 +135,42 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
 		router.navTo("details");
 	},
-	
-	
-	
-	
-	callServer:(oOptions)=>{
+
+
+
+
+    // callServer2:(oOptions)=>{
+    //     debugger;
+    //     let oConfig = {
+    //         url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
+    //         method: "POST",
+    //         data:JSON.stringify(oOptions),
+    //         dataType: "json",
+    //         contentType: "text/plain"
+    //     };
+    //     let oDeferred = jQuery.Deferred();
+	//
+    //     jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
+	//
+    //         oDeferred.resolve(response);
+    //     })
+    //         .fail(function(response, status, xhr, cfg) {
+	//
+    //             oDeferred.reject(response);
+    //         })
+    //         .always(function(response, status, xhr, cfg) {
+	//
+    //             sap.ui.core.BusyIndicator.hide();
+    //         });
+	//
+    //     return oDeferred.promise();
+    // },
+
+
+
+
+
+        callServer:(oOptions)=>{
 		debugger;
 	let oConfig = {
 		    url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
@@ -194,7 +225,6 @@ backendCall(oOptions,fnSuccess, fnReject){
 	   // xhttp.setRequestHeader("Accept", "application/json");
 	    xhttp.send(JSON.stringify(oOptions));  
 	    oDefObj.done(function(xhttp){
-	    	
 	    	fnSuccess(JSON.parse(xhttp.response))
 	    });
 //	    oDefObj.fail(function(xhttp){
@@ -212,21 +242,6 @@ backendCall(oOptions,fnSuccess, fnReject){
 //
 //	},
 
-/**
-* Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-* This hook is the same one that SAPUI5 controls get after being rendered.
-* @memberOf OnlineBanking.firstpage
-*/
-//	onAfterRendering: function() {
-//
-//	},
 
-/**
-* Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-* @memberOf OnlineBanking.firstpage
-*/
-//	onExit: function() {
-//
-//	}
 
 });

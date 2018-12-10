@@ -43,14 +43,14 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                                 oConfig = {
                                     IsCustomer: {
                                         Customerid : odata.CustId,
-                                        Password : odata.Password,
-										AccountNo : odata.AccountNo
+                                        Password  :   odata.Password,
+										AccNo :  selectedAcc.AccNo
                                     }
                                 };
 
-                                oController.callServer4(oConfig).then((response)=>{
+                                        oController.callServer4(oConfig).then((response)=>{
                                     if(oModel){
-                                        oModel.setProperty("/customer/Activ", response.CtActusers);
+                                        oModel.setProperty("/CsCustomerinfo", response.CsCustomerinfo);
                                     }
                                     else{
                                         oController.navi();
@@ -68,7 +68,10 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                         	   new sap.m.Text({text: "{Users>Branchcode}" }),
                         	   new sap.m.Text({text: "{Users>Pin}" }),
                         	   new sap.m.Text({text: "{Users>Language}" }),
-                        	   new sap.m.Text({text: "{Users>Status}" })
+                        	   new sap.m.Text({text: "{Users>Status}" }),
+							   new sap.m.Text({text: "{Users>Bankname}"}),
+							   new sap.m.Text({text:"{Users>Nickname}"})
+
                            ]
                         })
                     }
@@ -103,7 +106,13 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
     				}),
     				new sap.m.Column({
     					header:new sap.m.Text({text:"Status"})
-    				})
+    				}),
+					new sap.m.Column({
+						header:new sap.m.Text({text:"Bank name"})
+					}),
+					new sap.m.Column({
+						header:new sap.m.Text({text:"Nick name"})
+					})
     			],
 //    			select :(oEvt)=>{
 //    				debugger;

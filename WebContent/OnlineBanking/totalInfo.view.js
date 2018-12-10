@@ -14,6 +14,7 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
 	*/ 
 	createContent : function(oController) {
         let oView = this;
+        debugger;
         let oModel = oController.getOwnerComponent().getModel("Users");
         this.setModel(oModel, "Users");
 
@@ -27,7 +28,21 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
 
                 new sap.ui.layout.form.Form({
                     title: new sap.ui.core.Title({ text: "Active User" }),
-                    layout: new sap.ui.layout.form.ResponsiveGridLayout({}),
+                    layout: new sap.ui.layout.form.ResponsiveGridLayout({
+                        // labelSpanXL : 4,
+                        // labelSpanL : 4,
+                        // labelSpanM : 12,
+                        // labelSpanS : 12,
+                        // adjustLabelSpan : false,
+                        // emptySpanXL : 0,
+                        // emptySpanL :  0,
+                        // emptySpanM :0,
+                        // emptySpanS : 0,
+                        // columnsXL : 2,
+                        // columnsL : 2,
+                        // columnsM : 1,
+                        // singleContainerFullSize :false
+                        }),
                     formContainers:[
                         new sap.ui.layout.form.FormContainer({
                             formElements:[
@@ -35,14 +50,16 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                                 ({
                                     label:"CustomerId",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/CustId}"
                                     })]
                                 }),
                                 new sap.ui.layout.form.FormElement
                                 ({
                                     label:"GenId",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/GenId}"
                                     })]
                                 }),
 
@@ -50,7 +67,8 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                                 ({
                                     label:"Account No",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/AccNo}"
                                     })]
                                 }),
 
@@ -58,21 +76,24 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                                 ({
                                     label:"Name",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/Name}"
                                     })]
                                 }),
                                 new sap.ui.layout.form.FormElement
                                 ({
                                     label:"Mobile no",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/Mobileno}"
                                     })]
                                 }),
                                 new sap.ui.layout.form.FormElement
                                 ({
                                     label:"Branch",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/Branch}"
                                     })]
                                 }),
 
@@ -80,7 +101,8 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                                 ({
                                     label:"Branch code",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/Branchcode}"
                                     })]
                                 }),
 
@@ -88,7 +110,8 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                                 ({
                                     label:"Pin",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/Pin}"
                                     })]
                                 }),
 
@@ -96,7 +119,8 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                                 ({
                                     label:"Language",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/Language}"
                                     })]
                                 }),
 
@@ -104,7 +128,8 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                                 ({
                                     label:"Status",
                                     fields:[ new sap.m.Label({width:"250px",
-                                        design:sap.m.LabelDesign.Bold
+                                        design:sap.m.LabelDesign.Bold,
+                                        text:"{Users>/CsCustomerinfo/Account/Status}"
                                     })]
                                 }),
 
@@ -112,6 +137,14 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                         })
 
                     ]
+                }),
+                new sap.m.Bar({
+                       contentMiddle:[
+                           new sap.m.Text({
+                               text:"LATEST TRANSACTIONS",
+
+                           })
+                       ]
                 }),
                 new sap.m.Table({
                     alternateRowColors : true,
@@ -140,7 +173,30 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                         new sap.m.Column({
                             header:new sap.m.Text({text:"Transaction type"})
                         })
-                    ]
+                    ],
+
+                    items:{
+
+                        path:"Users>/CsCustomerinfo/Transactions" ,
+                        factory: function(sIdx, oContxt) {
+                            debugger;
+                            return new sap.m.ColumnListItem({
+                                cells:[
+
+                                    new sap.m.Text({text: "{Users>Fromt}" }),
+                                    new sap.m.Text({text: "{Users>Tot}" }),
+                                    new sap.m.Text({text: "{Users>Type}" }),
+                                    new sap.m.Text({text: "{Users>Amount}" }),
+                                    new sap.m.Text({text: "{Users>Balance}" }),
+                                    new sap.m.Text({text: "{Users>Trsdate}" }),
+                                    new sap.m.Text({text: "{Users>Trstime}" }),
+                                    new sap.m.Text({text: "{Users>Trstype}" })
+
+                                ]
+                            })
+                        }
+
+                    }
                 })
 
             ]
