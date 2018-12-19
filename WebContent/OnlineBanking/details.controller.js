@@ -35,14 +35,10 @@ sap.ui.controller("banking.OnlineBanking.details", {
 	onInit: function() {
 
 //		var router = sap.ui.core.UIComponent.getRouterFor(this);
-//		onRouteMatched = (oEvt)=>{    
-//		
+//		onRouteMatched = (oEvt)=>{
 //			this.getView().id = oEvt.getParameter("arguments").customerData;
-//		
 //		};
-//		
-//		
-//		router.attachRouteMatched("details/{customerData}", onRouteMatched);
+// 		router.attachRouteMatched("details/{customerData}", onRouteMatched);
 //		new sap.ui.getCore().getEventBus().subscribe("customerData", this.fnResponse ,this);
 
 	},

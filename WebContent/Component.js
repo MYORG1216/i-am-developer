@@ -109,9 +109,7 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 //		});
 
 	//	let Locale = sap.ui.getCore().getConfiguration().getLanguage();
-		
-		
-		
+
 		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
 
 		this.getRouter().initialize();
@@ -121,12 +119,55 @@ sap.ui.core.UIComponent.extend("banking.Component", {
             debugger;
 			history.go(-1)
 		};
-		
+		debugger
 		let Model = new sap.ui.model.json.JSONModel();
 		//Model.loadData("JSON/Users.json");
 		this.setModel(Model,"Users");
-			
-		let Model1 = new sap.ui.model.json.JSONModel();
+
+		let Model1 = new sap.ui.model.json.JSONModel({
+       // /**/ let oModel2 = new sap.ui.model.json.JSONModel({
+            "data": {
+                "customerId": "",
+                "Password": ""
+            },
+            "createUser": {
+                "customerId": "",
+                "Name": "",
+                "Password": "",
+                "RePwd": "",
+                "mobileNo": "",
+                "DOB": "",
+                "Mail": "",
+                "Country": ""
+            },
+            "Accountinfo" : {
+                "AccountNo":"",
+                "Bank name":"",
+                "Mobile No":"",
+                "Branch":"",
+                "Branch code":"",
+                "Pin":"",
+                "Language":"",
+                "Status":""
+            },
+            "addUser" : {
+                "CustomerId" :"",
+                "Name" : "",
+                "AccountNo":"",
+                "Branch":"",
+                "BranchCode":"",
+                "IFSCCode":"",
+                "TransactionLimit":"",
+                "Status":""
+            },
+            "loginbutton": true,
+            "register": false,
+            "form2":false
+            // "submitbutton":true
+        });
 		this.setModel(Model,"MyInfo");
+
+//		let Model2 = new sap.ui.model.json.JSONModel();
+//		this.setModel(Model,"Users1");
 	}
 });

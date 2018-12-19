@@ -19,7 +19,6 @@ sap.ui.jsview("banking.OnlineBanking.details", {
  	let oView = this;
  	let oModel = oController.getOwnerComponent().getModel("Users"),
  	box =	new sap.m.VBox({
-
  		items:[
  			new sap.m.Label({
  				text:"Customer Id"
@@ -64,7 +63,7 @@ sap.ui.jsview("banking.OnlineBanking.details", {
 		return new sap.m.Page({
 			title:"Details",
 //			showHeader:false,
-					
+
 			customHeader: new sap.m.Bar({
 					contentRight:[
 						new sap.m.Button({
@@ -98,15 +97,15 @@ sap.ui.jsview("banking.OnlineBanking.details", {
 		 			headerImage:"sap-icon://account",
 		 			//subheader:"50%",
 		 				press:function(){
-		 					let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
-		 					let oModel = oController.getOwnerComponent().getModel("Users");
-		 					var odata = oModel1.getProperty("/customer/Customer");
-		 					 oConfig = {
-		 							 IsCustomer: { 
-		 								 Customerid : odata.CustId,   
-		 								 Password : odata.Password 	 
-		 					 }		
-		 					 };
+		 let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
+		 let oModel = oController.getOwnerComponent().getModel("Users");
+		 var odata = oModel1.getProperty("/customer/Customer");
+		 oConfig = {
+		 	IsCustomer: { 
+		 			Customerid : odata.CustId,   
+		 			Password : odata.Password 	 
+		 					}		
+		 			};
 		 					// oView.page.setBusy(true);
 		 					oController.callServer1(oConfig).then((response)=>{
 		 						//oView.page.setBusy(false);
@@ -216,5 +215,4 @@ sap.ui.jsview("banking.OnlineBanking.details", {
 			]
 		});
 	}
-
 });

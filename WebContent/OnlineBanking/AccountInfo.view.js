@@ -119,8 +119,119 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 //    				oController.navi();
 //    				
 //    			}
+
 		});
-			
+
+        let odialog = new sap.m.Dialog({
+            title:" Another account",
+            content:[
+                new sap.ui.layout.form.Form({
+
+                    layout: new sap.ui.layout.form.ResponsiveGridLayout({}),
+                    formContainers:[
+                        new sap.ui.layout.form.FormContainer({
+                            formElements:[
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Name",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Number
+                                    })]
+                                }),
+
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"NickName",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Number
+                                    })]
+                                }),
+
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Account No",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Number
+                                    })]
+                                }),
+
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Mobile No",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Number
+                                    })]
+                                }),
+
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"BankName",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Text
+                                    })]
+                                }),
+
+
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Branch",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Text
+                                    })]
+                                }),
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Branch Code",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Number
+                                    })]
+                                }),
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Pin",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Number
+                                    })]
+                                }),
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Language",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Text
+                                    })]
+                                }),
+
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Balance",
+                                    fields:[ new sap.m.Input({width:"250px",
+                                        type:sap.m.InputType.Number
+                                    })]
+                                }),
+
+                            ]
+                        })
+                    ]
+                }).addStyleClass("Styling2")
+            ],
+            beginButton: new sap.m.Button({
+                text:"submit",
+                press:()=>{
+
+
+                }
+
+            }),
+            endButton:new sap.m.Button({
+                text:"cancel",
+                press:()=>{
+                    odialog.close();
+                }
+            })
+
+        });
+
+
 //	   oView.oTable.bindItems("Users>/Accountdetails",
 //			   new sap.m.ColumnListItem({
 //				   cells:[
@@ -137,12 +248,22 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 //           ]
 //        }))
  		return new sap.m.Page({
-			title: "Account Info",
+
+           headerContent:[
+           	new sap.m.Button({text:"add",
+               icon: "sap-icon://citizen-connect",
+				press:()=>{
+           		odialog.open();
+			}
+            }),
+		   ],
+			 title: "Account Info",
 			showNavButton:true,
 			navButtonPress: () => {
 			
 				var router = sap.ui.core.UIComponent.getRouterFor(this);
 				router.navBack("details");
+
 //				 router.navTo("details",{"custId": oCustomer.Customer.CustId});
 //				router.navTo("details",custId);
 			},

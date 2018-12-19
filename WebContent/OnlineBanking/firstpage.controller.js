@@ -44,25 +44,25 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		router.navTo("details",{"custId":oCustomer.Customer.CustId});
 	},
 
-	navi1:function(){	
-		
+	navi1:function(){
 		var oView = this.getView();
-		var Core = sap.ui.getCore();
+		var Core =  sap.ui.getCore();
+        jQuery.sap.require("sap.m.MessageBox");
+
+        let oCustomer = this.getOwnerComponent().getModel("MyInfo").getProperty("createUser");
 		// var customData = {}
-		jQuery.sap.require("sap.m.MessageBox");
-		var myModel = oView.getModel("Users1");
-		oCreateData = myModel.getProperty("/createUser");
+		// var myModel = oView.getModel("Users1");
+		//  oCreateData = myModel.getProperty("/createUser");
+		// var sName = oCreateData["Name"];
+		// var sMobileNo = oCreateData["MobileNo"];
+		// var sDOB = oCreateData["sDOB"];
+		// var scountry  = oCreateData["scountry"];
+		// var sMail = oCreateData["Mail"];
+		// var sPassword = oCreateData["sPassword"];
+		// var sRetypePassword = oCreateData["RePwd"];
+		// var scustomerId = oCreateData["scustomerId"];
 		
-		var sName = oCreateData["Name"];
-		var sMobileNo = oCreateData["MobileNo"];
-		var sDOB = oCreateData["sDOB"];
-		var scountry  = oCreateData["scountry"];
-		var sMail = oCreateData["Mail"];
-		var sPassword = oCreateData["sPassword"];
-		var sRetypePassword = oCreateData["RePwd"];
-		var scustomerId = oCreateData["scustomerId"];
-		
-		if(sname == null|| sname=="")
+		if(name == null|| name == "")
 			{
 			oView.a.setProperty("valueState",sap.ui.core.ValueState.Error);
 			sap.m.MessageBox.error("The name field should not be empty", {
@@ -71,25 +71,23 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 			return false;
 			}
 		
-		else if (sMobileNo ==null || sMobileNo ==""|| sMobileNo.length < 10)	
+		else if (MobileNo ==null || MobileNo ==""|| sMobileNo.length < 10)
 		{ 
 			oView.b.setProperty("valueState",sap.ui.core.ValueState.Error);
-			
 			sap.m.MessageBox.error("phno can't be blank", {
 				title:"Error Msg"
 			})
 			  return false;  
 			}
-		else if(!scountry === null || scountry == "")
+		else if(!country === null || country == "")
 		     { 
 			oView.e.setProperty("valueState",sap.ui.core.ValueState.Error);
-			 
 			sap.m.MessageBox.error("sPassword must be at least 6 characters long", {
 				title:"Error Msg"
 			})
 			  return false;  
 			  }
-		else if(sDOB == null || sDOB == NaN)
+		else if(DOB == null || DOB == NaN)
 		{
 			oView.c.setProperty("valueState",sap.ui.core.ValueState.Error);
 			sap.m.MessageBox.error("sPassword should be matched", {
@@ -97,7 +95,7 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 			})
 			return false;
 		}
-		else if(sPassword.length<6)
+		else if(Password.length<6)
 	     { 
 		oView.e.setProperty("valueState",sap.ui.core.ValueState.Error);
 		  
@@ -106,7 +104,7 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		})
 		  return false;  
 		  }
-	else if(sPassword!==sRetypePassword)
+	else if(Password!==RetypePassword)
 	{
 		oView.f.setProperty("valueState",sap.ui.core.ValueState.Error);
 		sap.m.MessageBox.error("sPassword should be matched", {
@@ -114,7 +112,7 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		})
 		return false;
 	}
-	else if (scustomerId === !NaN || scustomerId === "" || scustomerId<10)
+	else if (customerId === !NaN || customerId === "" || customerId<10)
 		{
 		oView.g.setProperty("valueState",sap.ui.core.ValueState.Error);
 		sap.m.MessageBox,error("give scustomerId properly",{
@@ -122,53 +120,45 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		})
 		}
 		
-		var omyModel2 = oView.getModel("Users");
-		var data2 = omyModel2.getProperty("/customersList");
-		data2.push(CreateData);
-	    omyModel2.setProperty("/customersList",data2);
-	 
-		var eventBus = sap.ui.getCore().getEventBus();
-	    var c=oView.getModel("Users1");
-	    var d= c.getProperty("/createUser");
-		eventBus.publish("channel1","event1");
-		this.getOwnerComponent().getModel("Users").setProperty("/currentUser",d);
-		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		router.navTo("details");
+		// var omyModel2 = oView.getModel("Users");
+		// var data2 = omyModel2.getProperty("/customersList");
+		// data2.push(CreateData);
+	    // omyModel2.setProperty("/customersList",data2);
+		// var eventBus = sap.ui.getCore().getEventBus();
+	    // var c=oView.getModel("Users1");
+	    // var d= c.getProperty("/createUser");
+		// eventBus.publish("channel1","event1");
+		// this.getOwnerComponent().getModel("Users").setProperty("/currentUser",d);
+		// var router = sap.ui.core.UIComponent.getRouterFor(this);
+		// router.navTo("details");
 	},
 
-
-
-
-    // callServer2:(oOptions)=>{
-    //     debugger;
-    //     let oConfig = {
-    //         url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
-    //         method: "POST",
-    //         data:JSON.stringify(oOptions),
-    //         dataType: "json",
-    //         contentType: "text/plain"
-    //     };
-    //     let oDeferred = jQuery.Deferred();
-	//
-    //     jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
-	//
-    //         oDeferred.resolve(response);
-    //     })
-    //         .fail(function(response, status, xhr, cfg) {
-	//
-    //             oDeferred.reject(response);
-    //         })
-    //         .always(function(response, status, xhr, cfg) {
-	//
-    //             sap.ui.core.BusyIndicator.hide();
-    //         });
-	//
-    //     return oDeferred.promise();
-    // },
-
-
-
-
+     // callServer3:(oOptions)=>{
+     //     debugger;
+     //     let oConfig = {
+     //         url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_VA_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
+     //         method: "POST",
+     //         data:JSON.stringify(oOptions),
+     //         dataType: "json",
+     //         contentType: "text/plain"
+     //     };
+     //     let oDeferred = jQuery.Deferred();
+	 //
+     //     jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
+	 //
+     //         oDeferred.resolve(response);
+     //     })
+     //         .fail(function(response, status, xhr, cfg) {
+	 //
+     //             oDeferred.reject(response);
+     //         })
+     //         .always(function(response, status, xhr, cfg) {
+	 //
+     //             sap.ui.core.BusyIndicator.hide();
+     //         });
+	 //
+     //     return oDeferred.promise();
+     // },
 
         callServer:(oOptions)=>{
 		debugger;
@@ -183,9 +173,7 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 //		    	"Accept": "application/json",
 //		    	"Content-Type": "application/json"
 //		    }
-		};            		
-
-//or   http://gicomsap16.gicom.local:8000/zgicom_student/Z1121_API_STUDENT_DETAILS?format=json&case=C&sap-client=100&sap-user=kanchus&sap-password=gicom2$" 		
+		};
     let oDeferred = jQuery.Deferred();
 
 	jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
@@ -203,7 +191,6 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 	
 	return oDeferred.promise();
 },
-
 
 backendCall(oOptions,fnSuccess, fnReject){
 	 let oDefObj = jQuery.Deferred();
@@ -232,16 +219,4 @@ backendCall(oOptions,fnSuccess, fnReject){
 //	    	fnReject(JSON.parse(xhttp.response))
 //	    })
 }
-
-/**
-* Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-* (NOT before the first rendering! onInit() is used for that one!).
-* @memberOf OnlineBanking.firstpageapplication
-*/
-//	onBeforeRendering: function() {
-//
-//	},
-
-
-
 });

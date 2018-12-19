@@ -132,6 +132,14 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                                         text:"{Users>/CsCustomerinfo/Account/Status}"
                                     })]
                                 }),
+                                new sap.ui.layout.form.FormElement
+                                ({
+                                    label:"Balance",
+                                    fields:[ new sap.m.Label({width:"250px",
+                                    design:sap.m.LabelDesign.Bold,
+                                    text:"{Users>/CsCustomerinfo/Account/Balance}"
+                                    })]
+                                })
 
                             ]
                         })
@@ -173,6 +181,7 @@ sap.ui.jsview("banking.OnlineBanking.totalInfo", {
                         new sap.m.Column({
                             header:new sap.m.Text({text:"Transaction type"})
                         })
+
                     ],
 
                     items:{
