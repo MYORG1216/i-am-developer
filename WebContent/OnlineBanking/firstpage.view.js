@@ -48,69 +48,67 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
         //     // "submitbutton":true
         // });
         // oView.setModel(oModel2, "MyInfo");
-        let oModel7 = oController.getOwnerComponent().getModel("users");
-      
+        // let oModel7 = oController.getOwnerComponent().getModel("users");
+
         jQuery.sap.require("sap.m.MessageBox");
         // let CreateUserModel = new sap.ui.model.json.JSONModel({
-            // "createUser": {
-            //     "customerId": "",
-            //     "Name": "",
-            //     "Password": "",
-            //     "RePwd": "",
-            //     "mobileNo": "",
-            //     "DOB": "",
-            //     "Mail": "",
-            //     "Country": ""
-            // },
-            //
-            // // "form1":true,
-            // "form2":false
-
+        // "createUser": {
+        //     "customerId": "",
+        //     "Name": "",
+        //     "Password": "",
+        //     "RePwd": "",
+        //     "mobileNo": "",
+        //     "DOB": "",
+        //     "Mail": "",
+        //     "Country": ""
+        // },
+        //
+        // // "form1":true,
+        // "form2":false
         // });
         // oView.setModel(CreateUserModel, "Users1");
         // let Locale = sap.ui.getCore().setModel(CreateUserModel, "Users1");
         oView.a = new sap.m.Input({
             width: "250px",
-            type: sap.m.InputType.Text
-            //value: "{Users1>/createUser/Name}"
+            type: sap.m.InputType.Text,
+            value:"{MyInfo>/Registeruser/Name}"
         });
 
         oView.b = new sap.m.Input({
             width: "250px",
-            type: sap.m.InputType.Number
-            // value: "{Users1>/createUser/MobileNo}"
+            type: sap.m.InputType.Number,
+            value:"{MyInfo>/Registeruser2/mobileNo}"
         });
 
         oView.c = new sap.m.Input({
             width: "250px",
-            type: sap.m.InputType.Number
-            // value: "{Users1>/createUser/DOB}"
+            type: sap.m.InputType.Number,
+            value:"{MyInfo>/Registeruser2/DOB}"
         });
 
         oView.d = new sap.m.Input({
             width: "250px",
-            type: sap.m.InputType.Text
-            // value: "{Users1>/createUser/Country}"
+            type: sap.m.InputType.Text,
+            value:"{MyInfo>/Registeruser2/Country}"
         });
 
         oView.e = new sap.m.Input({
             width: "250px",
-            type: sap.m.InputType.Password
-            // value:"{Users1>/createUser/Password}"
+            type: sap.m.InputType.Password,
+            value:"{MyInfo>/Registeruser2/Password}"
+
         });
 
         oView.f = new sap.m.Input({
             width: "250px",
             type: sap.m.InputType.RetypePassword
-            // value:"{Users1>/createUser/RePwd}"
         });
 
         oView.g = new sap.m.Input({
             width: "250px",
-            type: sap.m.InputType.Number
-            // value:"{Users1>/createUser/customerId}"
+            type: sap.m.InputType.Number,
+            value:"{MyInfo>/Registeruser2/customerId}"
         });
-
 
         oView.oForm = new sap.ui.layout.form.Form({
             visible:
@@ -151,10 +149,10 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
         oView.oForm1 = new sap.ui.layout.form.Form({
             visible:
                 {
-                     parts: ['MyInfo>/loginbutton','MyInfo>/form2'],
-                //  path:'{MyInfo>/loginbutton}',
+                    parts: ['MyInfo>/loginbutton','MyInfo>/form2'],
+                    //  path:'{MyInfo>/loginbutton}',
                     formatter: (bValue,cValue) => {
-                         return bValue === false && cValue === false;
+                        return bValue === false && cValue === false;
                     }
                 },
             title: new sap.ui.core.Title({text: "User Info"}),
@@ -194,31 +192,28 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                             label: "Mail",
                             fields: [new sap.m.Input({
                                 width: "250px",
-                                type: sap.m.InputType.Mail
-                                // value: "{Users1>/createUser/Mail}"
+                                type: sap.m.InputType.Mail,
+                                value:"{MyInfo>/Registeruser2/Mail}"
                             })]
                         }),
                         new sap.ui.layout.form.FormElement({
                             label: "Country",
                             fields: [oView.d]
                         })
-
                     ]
                 })
             ]
         }).addStyleClass("Styling");
 
-
         oView.oForm2 = new sap.ui.layout.form.Form({
             visible:
                 {
-                   path: 'MyInfo>/form2',
+                    path: 'MyInfo>/form2',
                     formatter: (cValue) => {
                         return cValue === true ;
 
                     }
                 },
-
             title: new sap.ui.core.Title({text: "YOU COMPLETED FIRST PHASE"}),
             layout: new sap.ui.layout.form.ResponsiveGridLayout({}),
             formContainers: [
@@ -228,57 +223,64 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                             label: "AccountNo",
                             fields: [new sap.m.Input({
                                 width: "100px",
-
+                                type: sap.m.InputType.Text,
+                                value:"{MyInfo>/Registeruser/Accountno}"
                             })]
                         }),
                         new sap.ui.layout.form.FormElement({
                             label: "Bank name",
                             fields: [new sap.m.Input({
                                 width: "100px",
-
+                                type: sap.m.InputType.Text,
+                                value:"{MyInfo>/Registeruser/Bankname}"
                             })]
                         }),
                         new sap.ui.layout.form.FormElement({
                             label: "Mobile No",
                             fields: [new sap.m.Input({
                                 width: "100px",
-
+                                type: sap.m.InputType.Number,
+                                value:"{MyInfo>/Registeruser/Mobileno}"
                             })]
                         }),
                         new sap.ui.layout.form.FormElement({
                             label: "Branch",
                             fields: [new sap.m.Input({
                                 width: "100px",
-
+                                type: sap.m.InputType.Text,
+                                value:"{MyInfo>/Registeruser/Branch}"
                             })]
                         }),
                         new sap.ui.layout.form.FormElement({
                             label: "Branch code",
                             fields: [new sap.m.Input({
                                 width: "100px",
-
+                                type: sap.m.InputType.Number,
+                                value:"{MyInfo>/Registeruser/Branchcode}"
                             })],
-
                         }),
                         new sap.ui.layout.form.FormElement({
                             label: "Pin",
                             fields: [new sap.m.Input({
                                 width: "100px",
-
+                                type: sap.m.InputType.Number,
+                                value:"{MyInfo>/Registeruser/Pin}"
                             })]
                         }),
                         new sap.ui.layout.form.FormElement({
                             label: "Language",
                             fields: [new sap.m.Input({
                                 width: "100px",
-
+                                type: sap.m.InputType.Text,
+                                value:"{MyInfo>/Registeruser/Language}"
                             })]
                         }),
                         new sap.ui.layout.form.FormElement({
                             label: "Status",
                             fields: [new sap.m.Input({
                                 width: "100px",
-
+                                type: sap.m.InputType.Text,
+                                value:"{MyInfo>/Registeruser/Status}"
                             })]
                         })
                     ]
@@ -294,7 +296,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                 ],
                 contentRight: [
 //						new sap.m.Toolbar({
-//							
+//
 //							content:[
 //							text:"ONLINE BANKING SERVICE"
 //						]
@@ -307,7 +309,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 //								text:"Login",
 ////								press: ()=>{
 ////									let oModel = oView.getModel("MyInfo");
-////									oModel.setProperty("/loginbutton", true);	
+////									oModel.setProperty("/loginbutton", true);
 ////								}
 //							}),
 //							new sap.m.Button({
@@ -315,7 +317,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 //								text:"NewUser",
 ////								  press:()=>{
 ////								    	let oModel = oView.getModel("MyInfo");
-////										oModel.setProperty("/loginbutton", false);	
+////										oModel.setProperty("/loginbutton", false);
 ////								    }
 //							})
 //							],
@@ -333,30 +335,30 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                             debugger;
                             let oSelectedItem = oEvent.getParameter("selectedItem");
                             if (oSelectedItem) {
-                                let oModel = oView.getModel("MyInfo");
+                                let oModel = oController.getOwnerComponent().getModel("MyInfo");
                                 sKey = oSelectedItem.getKey();
 
                                 // if (sKey && oModel) {
-                                    // (sKey === "Register") ? oModel.setProperty("/loginbutton", false) :
-                                    //     oModel.setProperty("/loginbutton", true);
+                                // (sKey === "Register") ? oModel.setProperty("/loginbutton", false) :
+                                //     oModel.setProperty("/loginbutton", true);
                                 // }
-                                    if(sKey === "Register" )
-                                    {
-                                        oModel.setProperty("/loginbutton",false);
-                                    }
-                                    else if(sKey === "Login")
-                                    {
-                                        oModel.setProperty("/loginbutton",true);
-                                        oModel.setProperty("/form2",false);
-                                       // oView.oForm2.setVisible(false);
-                                    }
-
-                                    // if(sKey === "Login")
-                                    // {
-                                    //     oModel.setProperty("/loginbutton",true);
-                                    //     oView.oForm2.setVisible(false);
-                                    // }
-
+                                if(sKey === "Register" )
+                                {
+                                    oModel.setProperty("/loginbutton",false);
+                                    debugger
+                                }
+                                else if(sKey === "Login")
+                                {
+                                    oModel.setProperty("/loginbutton",true);
+                                    oModel.setProperty("/form2",false);
+                                    debugger
+                                    // oView.oForm2.setVisible(false);
+                                }
+                                // if(sKey === "Login")
+                                // {
+                                //     oModel.setProperty("/loginbutton",true);
+                                //     oView.oForm2.setVisible(false);
+                                // }
                             }
                         }
                     })
@@ -368,7 +370,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                     justifyContent: "Center",
                     alignItems: "Center",
                     items: [
-//				new sap.m.HBox({		
+//				new sap.m.HBox({
 //					items:[
 //				new sap.m.SegmentedButton({
 //					buttons:[
@@ -377,19 +379,19 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
 //							width:"100px",
 //							press: ()=>{
 //								let oModel = oView.getModel("MyInfo");
-//								oModel.setProperty("/loginbutton", true);	
+//								oModel.setProperty("/loginbutton", true);
 //							}
-//				
+//
 //						}),
 //						new sap.m.Button({
 //							text:"New User",
 //						    width:"100px",
 //						    press:()=>{
 //						    	let oModel = oView.getModel("MyInfo");
-//								oModel.setProperty("/loginbutton", false);	
+//								oModel.setProperty("/loginbutton", false);
 //						    }
 //						})
-//						
+//
 //					]
 //				})
 //				]
@@ -400,8 +402,8 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                                 oView.oForm1,
                                 oView.oForm2
                             ]
-                            }),
-                          new sap.m.HBox({
+                        }),
+                        new sap.m.HBox({
                             items: [
                                 new sap.m.SegmentedButton({
                                     buttons: [
@@ -417,35 +419,31 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                                             press:(oEvt) => {
                                                 oController.navi1();
                                                 oView.getModel("MyInfo").setProperty("/form2", true)
-                                                /*let oModel1 = sap.ui.getCore().getModel("Users1");
-                                                let oModel  = oController.getOwnerComponent().getModel("Users");
-                                                let contnue = oView.getModel("Users1").getProperty("/form2");
-                                                var odata   = oModel1.getProperty("/createUser");
-                                                oConfig = {
-                                                    IsCustomer: {
-
-                                                        Customerid : odata.customerId,
-                                                        Password : odata.Password,
-                                                        Name :odata.Name,
-                                                        MobileNo :odata.mobileNo,
-                                                        DOB:odata.DOB,
-                                                        Mail: odata.Mail,
-                                                        Country:odata.Country
-                                                    }
-                                                };
-                                                // oView.page.setBusy(true);
-                                                   oController.callServer3(oConfig).then((response)=>{
-                                                   debugger;
-                                                   //oView.page.setBusy(false);
-                                                   debugger;
-                                                   if(oModel){
-                                                   oModel.setProperty("/createUser", response.CsCustomer);
-                                                   }
-                                                   else{
-                                                      oController.navi();
-                                                   }
-                                                   });*/
-
+                                               //
+                                               //  let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
+                                               //  let  odata =    oModel1.getProperty("/Registeruser");
+                                               //
+                                               //  // let oModel1 = sap.ui.getCore().getModel("Users1");
+                                               //  // let oModel  = oController.getOwnerComponent().getModel("Users");
+                                               //  // let contnue = oView.getModel("Users1").getProperty("/form2");
+                                               //  // var odata   = oModel1.getProperty("/createUser");
+                                               //  oConfig = {
+                                               //      IsCustomerinfo: {
+                                               //          CustId : odata.customerId,
+                                               //          Password : odata.Password,
+                                               //          Name :odata.Name,
+                                               //          Mobileno :odata.mobileNo,
+                                               //          DOB:odata.DOB,
+                                               //          Email: odata.Mail,
+                                               //          Country:odata.Country
+                                               //
+                                               //      }
+                                               //  };
+                                               //  oController.getOwnerComponent().callServer1(oConfig,"Z37_BANKING_NEWCUSTOMER_API").then((response)=> {
+                                               //      if (oModel1) {
+                                               //          oModel1.setProperty("/customer/Activ", response.CtAcnt);
+                                               //      }
+                                               //  })
                                             }
                                         }),
                                         new sap.m.Button({
@@ -460,55 +458,75 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                                                 },
                                             press: () => {
                                                 debugger
-                                                var oModel3 = oView.getModel("MyInfo");
+                                                var oModel1 = oController.getOwnerComponent().getModel("MyInfo");
                                                 var submit =  oView.getModel("MyInfo").getProperty("/loginbutton");
-                                                var oModel4 = oView.getModel("Users");
-                                                var odata =    oModel3.getProperty("/data");
+                                                // var oModel = oController.getOwnerComponent().getModel("Users");
+                                                var odata =    oModel1.getProperty("/data");
+                                                var odata1 =   oModel1.getProperty("/Registeruser");
+                                                var odata2 =  oModel1.getProperty("/Registeruser2");
                                                 oConfig = {
                                                     IsCustomer: {
                                                         Customerid: odata.customerId,
                                                         Password: odata.Password
-                                                    }
+                                                    },
+                                                    IsCustomerinfo: {
+                                                                 "CustId": odata2.customerId,
+                                                                 "Password" : odata2.Password,
+                                                                 "Name" :odata2.Name,
+                                                                 "Mobileno" :odata2.mobileNo,
+                                                                 "DOB":odata2.DOB,
+                                                                 "Email": odata2.Mail,
+                                                                 "Country":odata2.Country
+                                                             },
+                                                    IsAccountholder:{
+                                                        "AccNo":odata1.Accountno,
+                                                        "Nickname":odata1.Nickname,
+                                                        "Bankname":odata1.Bankname,
+                                                        "Mobileno":odata1.Mobileno,
+                                                        "Branch":odata1.Branch,
+                                                        "Branchcode":odata1.Branchcode,
+                                                        "Pin":odata1.Pin,
+                                                        "Language":odata1.Language,
+                                                        "Status":odata1.Status
+                                                            }
                                                 };
-                                                oView.page.setBusy(true);
+                                                // oView.page.setBusy(true);
                                                 if (submit === false) {
-
-                                                    oController.callServer(oConfig).then((response) => {
-                                                        debugger
-                                                        oView.page.setBusy(false);
-                                                        let oModel = oController.getOwnerComponent().getModel("Users");
-                                                        debugger
-                                                        if (oModel) {
-                                                            oModel.setProperty("/customer", response.CsCustomer);
+                                                    oController.getOwnerComponent().callServer1(oConfig,"Z37_BANKING_CREATE_API").then((response)=> {
+                                                        if (oModel1) {
+                                                            oModel1.setProperty("/customer/Activ", response.CtAcnt);
                                                         }
-
-                                                        if (response.CsCustomer.Customer.Name === "No customer") {
-                                                            sap.m.MessageBox.information("No user with these credentials", {
-                                                                title: "Please enter the valid data",
-
-                                                            });
-                                                        }
-                                                        else {
-                                                            oController.navi();
-                                                        }
+                                                        // oController.callServer1(oConfig).then((response) => {
+                                                        //     debugger
+                                                        // oView.page.setBusy(false);
+                                                        // let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
+                                                        // if (oModel1) {
+                                                        //     oModel1.setProperty("/customer", response.CsCustomer);
+                                                        // }
+                                                        // if (response.CsCustomer.Customer.Name === "No customer") {
+                                                        // sap.m.MessageBox.information("No user with these credentials", {
+                                                        //     title: "Please enter the valid data",
+                                                        // });
+                                                        // }
+                                                        // else {
+                                                        //     oController.navi();
+                                                        // }
+                                                        // });
                                                     });
-
-
                                                 }
                                                 else {
                                                     oController.callServer(oConfig).then((response) => {
                                                         debugger
                                                         oView.page.setBusy(false);
-                                                        let oModel = oController.getOwnerComponent().getModel("Users");
+                                                        let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
                                                         debugger
-                                                        if (oModel) {
-                                                            oModel.setProperty("/customer", response.CsCustomer);
+                                                        if (oModel1) {
+                                                            oModel1.setProperty("/customer", response.CsCustomer);
                                                         }
 
                                                         if (response.CsCustomer.Customer.Name === "No customer") {
                                                             sap.m.MessageBox.information("No user with these credentials", {
                                                                 title: "Please enter the valid data",
-
                                                             });
                                                         }
                                                         else {
@@ -539,19 +557,17 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                                             press: () => {
                                                 debugger
 
-                                                    oConfig.empty;
-                                                    sap.m.MessageBox.error("you clicked cancel button", {
-                                                        title: "Error Msg"
+                                                oConfig.empty;
+                                                sap.m.MessageBox.error("you clicked cancel button", {
+                                                    title: "Error Msg"
 
                                                 })
                                             }
                                         })
-
                                     ]
                                 })
                             ]
                         })
-
                     ]
                 })
             ]

@@ -81,7 +81,7 @@ sap.ui.controller("banking.OnlineBanking.AccountInfo", {
 	navi:function(selectedAcc){
 		debugger
 		var router = sap.ui.core.UIComponent.getRouterFor(this);
-		let oCustomer = this.getOwnerComponent().getModel("Users").getProperty("/customer");
+		let oCustomer = this.getOwnerComponent().getModel("MyInfo").getProperty("/customer");
 		router.navTo("totalInfo",{"custId": oCustomer.Customer.CustId, "accountId":selectedAcc.AccNo});
 	}
 		
@@ -95,6 +95,7 @@ sap.ui.controller("banking.OnlineBanking.AccountInfo", {
 //	},
 
 /**
+ *
 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
 * This hook is the same one that SAPUI5 controls get after being rendered.
 * @memberOf OnlineBanking.AccountInfo

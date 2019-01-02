@@ -102,27 +102,21 @@ sap.ui.core.UIComponent.extend("banking.Component", {
 	},
 
 	init : function() {
-	
 //		let Data = new sap.ui.model.json.JSONModel({
-//			
-//				
 //		});
-
 	//	let Locale = sap.ui.getCore().getConfiguration().getLanguage();
 
 		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
-
 		this.getRouter().initialize();
-		
 		this.getRouter().navBack = ()=>{
             this.getRouter();
             debugger;
 			history.go(-1)
 		};
 		debugger
-		let Model = new sap.ui.model.json.JSONModel();
-		//Model.loadData("JSON/Users.json");
-		this.setModel(Model,"Users");
+		// let Model = new sap.ui.model.json.JSONModel();
+		// //Model.loadData("JSON/Users.json");
+		// this.setModel(Model,"Users");
 
 		let Model1 = new sap.ui.model.json.JSONModel({
        // /**/ let oModel2 = new sap.ui.model.json.JSONModel({
@@ -131,14 +125,14 @@ sap.ui.core.UIComponent.extend("banking.Component", {
                 "Password": ""
             },
             "createUser": {
-                "customerId": "",
+                /*"customerId": "",
                 "Name": "",
                 "Password": "",
                 "RePwd": "",
                 "mobileNo": "",
                 "DOB": "",
                 "Mail": "",
-                "Country": ""
+                "Country": ""*/
             },
             "Accountinfo" : {
                 "AccountNo":"",
@@ -150,24 +144,45 @@ sap.ui.core.UIComponent.extend("banking.Component", {
                 "Language":"",
                 "Status":""
             },
+                 // "addUser" :[],
             "addUser" : {
-                "CustomerId" :"",
-                "Name" : "",
-                "AccountNo":"",
-                "Branch":"",
-                "BranchCode":"",
-                "IFSCCode":"",
-                "TransactionLimit":"",
-                "Status":""
             },
+			"addCustomer": {
+			},
+            "addTrans": {
+            },
+			"Registeruser":{},
+            "Registeruser2":{},
+			"customer":{},
             "loginbutton": true,
             "register": false,
             "form2":false
             // "submitbutton":true
         });
-		this.setModel(Model,"MyInfo");
+		this.setModel(Model1,"MyInfo");
+	},
+    callServer1:(oOptions,sAPIName)=>{
+        debugger;
+        let oConfig = {
+            url: `http://gicomsap16.gicom.local:8000/gicom/jsonhandler/${sAPIName}?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi`,
+            method: "POST",
+            data:JSON.stringify(oOptions),
+            dataType: "json",
+            contentType: "text/plain"
+        };
 
-//		let Model2 = new sap.ui.model.json.JSONModel();
-//		this.setModel(Model,"Users1");
-	}
+        let oDeferred = jQuery.Deferred();
+        jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
+            oDeferred.resolve(response);
+        })
+            .fail(function(response, status, xhr, cfg)  {
+
+                oDeferred.reject(response);
+            })
+            .always(function(response, status, xhr, cfg) {
+
+                sap.ui.core.BusyIndicator.hide();
+            });
+        return oDeferred.promise();
+    }
 });

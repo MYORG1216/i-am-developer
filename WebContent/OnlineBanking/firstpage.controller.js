@@ -39,9 +39,10 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		debugger;
 		let router = sap.ui.core.UIComponent.getRouterFor(this);
 		//new sap.ui.getCore().getEventBus().publish("customerData", response );
-		let oModel = this.getView().getModel("Users");
+		let oModel = this.getView().getModel("MyInfo");
 		let oCustomer = oModel.getProperty("/customer");
 		router.navTo("details",{"custId":oCustomer.Customer.CustId});
+
 	},
 
 	navi1:function(){
@@ -133,32 +134,7 @@ sap.ui.controller("banking.OnlineBanking.firstpage", {
 		// router.navTo("details");
 	},
 
-     // callServer3:(oOptions)=>{
-     //     debugger;
-     //     let oConfig = {
-     //         url: "http://gicomsap16.gicom.local:8000/gicom/jsonhandler/Z37_BANKING_VA_API?format=json&case=C&sap-client=100&sap-user=raavi&sap-password=padmavathi",
-     //         method: "POST",
-     //         data:JSON.stringify(oOptions),
-     //         dataType: "json",
-     //         contentType: "text/plain"
-     //     };
-     //     let oDeferred = jQuery.Deferred();
-	 //
-     //     jQuery.ajax(oConfig).done(function(response, status, xhr, cfg) {
-	 //
-     //         oDeferred.resolve(response);
-     //     })
-     //         .fail(function(response, status, xhr, cfg) {
-	 //
-     //             oDeferred.reject(response);
-     //         })
-     //         .always(function(response, status, xhr, cfg) {
-	 //
-     //             sap.ui.core.BusyIndicator.hide();
-     //         });
-	 //
-     //     return oDeferred.promise();
-     // },
+
 
         callServer:(oOptions)=>{
 		debugger;

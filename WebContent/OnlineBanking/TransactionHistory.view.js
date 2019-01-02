@@ -15,8 +15,9 @@ sap.ui.jsview("banking.OnlineBanking.TransactionHistory", {
 	createContent : function(oController) {
 		let oView = this;
 	     //let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
-	    let oModel = oController.getOwnerComponent().getModel("Users"); 
-		this.setModel(oModel, "Users");
+	    // let oModel = oController.getOwnerComponent().getModel("Users");
+        let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
+        this.setModel(oModel1, "MyInfo");
 		
 		oView.oTable1 = new sap.m.Table
 		({
@@ -52,20 +53,21 @@ sap.ui.jsview("banking.OnlineBanking.TransactionHistory", {
 			
 			items:{
 				// path: "Users>/TransactionHistory",
-	              path:"Users>/customer/Transactions" ,
+	            //   path:"Users>/customer/Transactions" ,
+                path:"MyInfo>/customer/Transactions",
                  factory: function(sIdx, oContxt) {
                      debugger;
                      return new sap.m.ColumnListItem({
                         cells:[
 
-                     	   new sap.m.Text({text: "{Users>Fromt}" }),
-                     	   new sap.m.Text({text: "{Users>Tot}" }),
-                     	   new sap.m.Text({text: "{Users>Type}" }),
-                     	   new sap.m.Text({text: "{Users>Amount}" }),
-                     	   new sap.m.Text({text: "{Users>Balance}" }),
-                     	   new sap.m.Text({text: "{Users>Trsdate}" }),
-                     	   new sap.m.Text({text: "{Users>Trstime}" }),
-                     	  new sap.m.Text({text: "{Users>Trstype}" })
+                     	   new sap.m.Text({text: "{MyInfo>Fromt}" }),
+                     	   new sap.m.Text({text: "{MyInfo>Tot}" }),
+                     	   new sap.m.Text({text: "{MyInfo>Type}" }),
+                     	   new sap.m.Text({text: "{MyInfo>Amount}" }),
+                     	   new sap.m.Text({text: "{MyInfo>Balance}" }),
+                     	   new sap.m.Text({text: "{MyInfo>Trsdate}" }),
+                     	   new sap.m.Text({text: "{MyInfo>Trstime}" }),
+                     	  new sap.m.Text({text: "{MyInfo>Trstype}" })
                      	   
                         ]
                      })

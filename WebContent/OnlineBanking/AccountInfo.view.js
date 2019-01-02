@@ -21,28 +21,32 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 	createContent : function(oController) {
 		let oView = this;
 	    // let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
-		let oModel = oController.getOwnerComponent().getModel("Users");
+		// let oModel = oController.getOwnerComponent().getModel("Users");
+        let oModel = oController.getOwnerComponent().getModel("MyInfo");
 		//router.navTo("details",{"custId":oCustomer.CsCustomer.Customer.CustId});
 	     debugger;
-	     this.setModel(oModel,"Users");
-	    oView.oTable = new sap.m.Table({
+	    // this.setModel(oModel,"Users");
+        this.setModel(oModel,"MyInfo");
+        oView.oTable = new sap.m.Table({
 			//mode: sap.m.ListMode.SingleSelectMaster,
 				items: {
-					path:"Users>/customer/Accounts",
+					// path:"Users>/customer/Accounts",
+                    path:"MyInfo>/customer/Accounts",
                   //  path: "Users>/customer/Account",  
                   //  templateShareable: true,
                     factory: function(sIdx, oContxt) {
                         return new sap.m.ColumnListItem({
                        	type: sap.m.ListType.Navigation,
                         	press:(oEvt)=>{
-                        		let selectedAcc = oEvt.getSource().getBindingContext("Users").getObject();
+                        		let selectedAcc = oEvt.getSource().getBindingContext("MyInfo").getObject();
 
                                 let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
-                                let oModel = oController.getOwnerComponent().getModel("Users");
-                                var odata = oModel1.getProperty("/customer/Customer");
+                               // let oModel = oController.getOwnerComponent().getModel("Users");
+                               // var odata = oModel1.getProperty("/customer/Customer");
+                                 var odata = oModel1.getProperty("/data");
                                 oConfig = {
                                     IsCustomer: {
-                                        Customerid : odata.CustId,
+                                        Customerid : odata.customerId,
                                         Password  :   odata.Password,
 										AccNo :  selectedAcc.AccNo
                                     }
@@ -59,18 +63,18 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                                 });
                         	},
                            cells:[
-                        	   new sap.m.Text({text: "{Users>CustId}" }),
-                        	   new sap.m.Text({text: "{Users>GenId}" }),
-                        	   new sap.m.Text({text: "{Users>AccNo}" }),
-                        	   new sap.m.Text({text: "{Users>Name}" }),
-                        	   new sap.m.Text({text: "{Users>Mobileno}" }),
-                        	   new sap.m.Text({text: "{Users>Branch}" }),
-                        	   new sap.m.Text({text: "{Users>Branchcode}" }),
-                        	   new sap.m.Text({text: "{Users>Pin}" }),
-                        	   new sap.m.Text({text: "{Users>Language}" }),
-                        	   new sap.m.Text({text: "{Users>Status}" }),
-							   new sap.m.Text({text: "{Users>Bankname}"}),
-							   new sap.m.Text({text:"{Users>Nickname}"})
+                        	   new sap.m.Text({text: "{MyInfo>CustId}" }),
+                        	   new sap.m.Text({text: "{MyInfo>GenId}" }),
+                        	   new sap.m.Text({text: "{MyInfo>AccNo}" }),
+                        	   new sap.m.Text({text: "{MyInfo>Name}" }),
+                        	   new sap.m.Text({text: "{MyInfo>Mobileno}" }),
+                        	   new sap.m.Text({text: "{MyInfo>Branch}" }),
+                        	   new sap.m.Text({text: "{MyInfo>Branchcode}" }),
+                        	   new sap.m.Text({text: "{MyInfo>Pin}" }),
+                        	   new sap.m.Text({text: "{MyInfo>Language}" }),
+                        	   new sap.m.Text({text: "{MyInfo>Status}" }),
+							   new sap.m.Text({text: "{MyInfo>Bankname}"}),
+							   new sap.m.Text({text:"{MyInfo>Nickname}"})
 
                            ]
                         })
@@ -122,7 +126,7 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 
 		});
 
-        let odialog = new sap.m.Dialog({
+        oView.odialog = new sap.m.Dialog({
             title:" Another account",
             content:[
                 new sap.ui.layout.form.Form({
@@ -133,9 +137,18 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                             formElements:[
                                 new sap.ui.layout.form.FormElement
                                 ({
+                                    label:"Customer Id",
+                                    fields:[  new sap.m.Label({
+                                        design:sap.m.LabelDesign.Bold,
+                                        text: "{MyInfo>/customer/Customer/CustId}"
+                                    })]
+                                }),
+                                new sap.ui.layout.form.FormElement
+                                ({
                                     label:"Name",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Number
+                                        type:sap.m.InputType.Text,
+                                        value: "{MyInfo>/addCustomer/Name}"
                                     })]
                                 }),
 
@@ -143,7 +156,8 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                                 ({
                                     label:"NickName",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Number
+                                        type:sap.m.InputType.Text,
+                                        value: "{MyInfo>/addCustomer/NickName}"
                                     })]
                                 }),
 
@@ -151,7 +165,8 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                                 ({
                                     label:"Account No",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Number
+                                        type:sap.m.InputType.Text,
+                                        value: "{MyInfo>/addCustomer/AccountNo}"
                                     })]
                                 }),
 
@@ -159,7 +174,8 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                                 ({
                                     label:"Mobile No",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Number
+                                        type:sap.m.InputType.Number,
+                                        value: "{MyInfo>/addCustomer/MobileNo}"
                                     })]
                                 }),
 
@@ -167,7 +183,8 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                                 ({
                                     label:"BankName",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Text
+                                        type:sap.m.InputType.Text,
+                                        value: "{MyInfo>/addCustomer/BankName}"
                                     })]
                                 }),
 
@@ -176,39 +193,34 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                                 ({
                                     label:"Branch",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Text
+                                        type:sap.m.InputType.Text,
+                                        value: "{MyInfo>/addCustomer/Branch}"
                                     })]
                                 }),
                                 new sap.ui.layout.form.FormElement
                                 ({
                                     label:"Branch Code",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Number
+                                        type:sap.m.InputType.Number,
+                                        value: "{MyInfo>/addCustomer/BranchCode}"
                                     })]
                                 }),
                                 new sap.ui.layout.form.FormElement
                                 ({
                                     label:"Pin",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Number
+                                        type:sap.m.InputType.Number,
+                                        value: "{MyInfo>/addCustomer/Pin}"
                                     })]
                                 }),
                                 new sap.ui.layout.form.FormElement
                                 ({
                                     label:"Language",
                                     fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Text
+                                        type:sap.m.InputType.Text,
+                                        value: "{MyInfo>/addCustomer/Language}"
                                     })]
                                 }),
-
-                                new sap.ui.layout.form.FormElement
-                                ({
-                                    label:"Balance",
-                                    fields:[ new sap.m.Input({width:"250px",
-                                        type:sap.m.InputType.Number
-                                    })]
-                                }),
-
                             ]
                         })
                     ]
@@ -217,20 +229,40 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
             beginButton: new sap.m.Button({
                 text:"submit",
                 press:()=>{
-
-
+                    let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
+                    var odata = oModel1.getProperty("/addCustomer");
+                    var odata1 = oModel1.getProperty("/customer/Customer");
+                    oConfig = {
+                        "IsNewcustomer": {
+                            "CustId": odata1.CustId,
+                             "Name":odata.Name,
+                            "Nickname":odata.NickName,
+                            "AccNo": odata.AccountNo,
+                            "Bankname": odata.BankName,
+                            "Mobileno":odata.MobileNo,
+                            "Branch": odata.Branch,
+                            "Branchcode": odata.BranchCode,
+                            "Pin": odata.Pin,
+                            "Language": odata.Language,
+                            "Status": "A"
+                        }
+                    };
+                    oController.getOwnerComponent().callServer1(oConfig,"Z37_BANKING_NEWCUSTOMER_API").then((response)=>{
+                        if(oModel1){
+                            oModel1.setProperty("/customer/Activ",response.CtAcnt);
+                        }
+                    });
+                odata = {};
+                    oModel1.setProperty("/addCustomer",odata);
                 }
-
             }),
             endButton:new sap.m.Button({
                 text:"cancel",
                 press:()=>{
-                    odialog.close();
+                  oView.odialog.close();
                 }
             })
-
         });
-
 
 //	   oView.oTable.bindItems("Users>/Accountdetails",
 //			   new sap.m.ColumnListItem({
@@ -247,13 +279,13 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 //	        	new sap.m.Text({text: "{Users>status" })    	   
 //           ]
 //        }))
- 		return new sap.m.Page({
+ 		    return new sap.m.Page({
 
            headerContent:[
            	new sap.m.Button({text:"add",
                icon: "sap-icon://citizen-connect",
 				press:()=>{
-           		odialog.open();
+           		oView.odialog.open();
 			}
             }),
 		   ],
@@ -269,7 +301,8 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 			},
 			
 			content: [
-			   oView.oTable
+			   oView.oTable,
+                oView.odialog
 			]
 		});
 	}

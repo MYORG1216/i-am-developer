@@ -15,10 +15,10 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 	createContent : function(oController) {
 
 		 let oView = this;
-	     let oModel = oController.getOwnerComponent().getModel("Users");
-        let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
-	     this.setModel(oModel, "Users");
-	     this.setModel(oModel1,"MyInfo");
+	   //  let oModel1 = oController.getOwnerComponent().getModel("Users");
+         let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
+	     //this.setModel(oModel, "Users");
+	      this.setModel(oModel1,"MyInfo");
 	     
 		oView.oTable2 = new sap.m.Table
 		({
@@ -48,27 +48,27 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 			],
 			
 			items:{
-				 path: "Users>/customer/Activ",
-               
+			    path:"MyInfo>/customer/Activ",
+				 // path: "MyInfo>/customer/Activ",
+                // parts: ['MyInfo>/loginbutton','MyInfo>/form2'],
                   factory: function(sIdx, oContxt) {
                       debugger;
-                      return new sap.m.ColumnListItem({
+                          return new sap.m.ColumnListItem({
                          cells:[ 
-                      	   new sap.m.Text({text: "{Users>CustId}" }),
-                      	   new sap.m.Text({text: "{Users>AccNo}" }),
-                      	   new sap.m.Text({text: "{Users>Branch}" }),
-                      	   new sap.m.Text({text: "{Users>Branchcode}" }),
-                      	   new sap.m.Text({text: "{Users>Ifsccode}" }),
-                      	   new sap.m.Text({text: "{Users>Status}" }),
-                      	   new sap.m.Text({text: "{Users>Translimit}" })
-                      	   
+                      	   new sap.m.Text({text: "{MyInfo>CustId}" }),
+                      	   new sap.m.Text({text: "{MyInfo>AccNo}" }),
+                      	   new sap.m.Text({text: "{MyInfo>Branch}" }),
+                      	   new sap.m.Text({text: "{MyInfo>Branchcode}" }),
+                      	   new sap.m.Text({text: "{MyInfo>Ifsccode}" }),
+                      	   new sap.m.Text({text: "{MyInfo>Status}" }),
+                      	   new sap.m.Text({text: "{MyInfo>Translimit}" })
                          ]
                       })
                   }	
 		}	
-		})	
+		})
 		
-		let odialog = new sap.m.Dialog({
+		 oView.odialog = new sap.m.Dialog({
 			title:"Active User",
 		content:[
 			 new sap.ui.layout.form.Form({
@@ -80,29 +80,29 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
                             new sap.ui.layout.form.FormElement
                             ({
                                 label:"CustomerId",
-                                fields:[ new sap.m.Input({width:"250px",
-                                    type:sap.m.InputType.Number,
-                                    value: "{MyInfo>/addUser/CustomerId}"
+                                 fields:[ new sap.m.Label({
+                                     // width:"250px",
+                                    // type:sap.m.InputType.Number,
+                                    design:sap.m.LabelDesign.Bold,
+                                    text: "{MyInfo>/customer/Customer/CustId}"
                                 })]
                             }),
-							new sap.ui.layout.form.FormElement
+                            new sap.ui.layout.form.FormElement
 							({	
-								label:"Name",
+								label:"Bankname",
 								fields:[ new sap.m.Input({width:"250px",
 									type:sap.m.InputType.Text,
-                                    value: "{MyInfo>/addUser/Name}"
+                                    value: "{MyInfo>/addUser/Bankname}"
 									})]
 							}),
 			new sap.ui.layout.form.FormElement
 			({	
 				label:"Account No",
 				fields:[ new sap.m.Input({width:"250px",
-					type:sap.m.InputType.Number,
-                    value: "{MyInfo>/addUser/AccountNo}"
+					type:sap.m.InputType.Text,
+                    value: "{MyInfo>/addUser/AccNo}"
 					})]
 			}),
-
-			
 			new sap.ui.layout.form.FormElement
 			({	
 				label:"Branch",
@@ -124,7 +124,7 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 				label:"IFSC Code",
 				fields:[ new sap.m.Input({width:"250px",
 					type:sap.m.InputType.Number,
-                    value: "{MyInfo>/addUser/IFSCCode}"
+                    value: "{MyInfo>/addUser/IFSCCODE}"
 					})]
 			}),
 			
@@ -133,7 +133,7 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 				label:"Transaction Limit",
 				fields:[ new sap.m.Input({width:"250px",
 					type:sap.m.InputType.Number,
-                    value: "{MyInfo>/addUser/TransactionLimit}"
+                    value: "{MyInfo>/addUser/Translimit}"
 					})]
 			}),
 
@@ -146,39 +146,37 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 			text:"submit",
 			press:()=>{
 				debugger;
-				oController.box1();
-
+				//oController.box1();
                     let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
-                    let oModel = oController.getOwnerComponent().getModel("Users");
+                   // let oModel = oController.getOwnerComponent().getModel("Users");
                     var odata = oModel1.getProperty("/addUser");
+                    var odata1 = oModel1.getProperty("/customer/Customer");
                     oConfig = {
-                        IsActuser: {
-                             Customerid : odata.CustomerId,
-                           Name : odata.Name,
-                            AccountNo : odata.AccountNo,
-                            Branch : odata.Branch,
-                            BranchCode: odata.BranchCode,
-                            IFSCCode: odata.IFSCCode,
-                            TransactionLimit : odata.TransactionLimit,
-                            Status : "A"
+                        "IsActuser": {
+                            "CustId": odata1.CustId,
+                            "Bankname": odata.Bankname,
+                            "AccNo": odata.AccNo,
+                            "Branch": odata.Branch,
+                            "Branchcode": odata.Branchcode,
+                            "IFSCCODE": odata.IFSCCODE,
+                            "Translimit": odata.Translimit,
+                            "Status": "A"
                         }
                     };
-                oController.callServer1(oConfig).then((response)=>{
+                    oController.getOwnerComponent().callServer1(oConfig,"z37_BANKING_ACTUSER_API").then((response)=>{
                     //oView.page.setBusy(false);
-                    if(oModel){
-                        oModel.setProperty("/customer/addUser", response.CtAcnt);
-                    }
-                    else{
-                        oController.navi();
-                    }
-                    oController.navi1(oView.id);
+
+                    if(oModel1){
+                        oModel1.setProperty("/customer/Activ", response.CtActusers);
+                        // oModel1.setProperty("/customer/addUser", response.CtNewusers);
+                        }
                 });
 			}
 		}),
 		endButton:new sap.m.Button({
 					text:"cancel",
 					press:()=>{
-						odialog.close();
+						oView.odialog.close();
 					}
 				})
 		});
@@ -192,7 +190,7 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 					icon:"sap-icon://sys-add",
 						press:function(){
 							debugger;
-							odialog.open();	
+							oView.odialog.open();
 						}
 				})
 			]	
@@ -203,11 +201,10 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 				//router.navTo("details",{"custId": oCustomer.Customer.CustId});
 			router.navBack();
 			},
-
 			content: [
-			oView.oTable2
+			oView.oTable2,
+				oView.odialog
 			]
-			
 		});
 	}
 
