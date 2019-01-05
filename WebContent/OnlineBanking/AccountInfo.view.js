@@ -20,8 +20,7 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 	 */ 
 	createContent : function(oController) {
 		let oView = this;
-	    // let oModel = new sap.ui.model.json.JSONModel("JSON/Users.json");
-		// let oModel = oController.getOwnerComponent().getModel("Users");
+        jQuery.sap.require("sap.m.MessageBox");
         let oModel = oController.getOwnerComponent().getModel("MyInfo");
 		//router.navTo("details",{"custId":oCustomer.CsCustomer.Customer.CustId});
 	     debugger;
@@ -39,7 +38,6 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                        	type: sap.m.ListType.Navigation,
                         	press:(oEvt)=>{
                         		let selectedAcc = oEvt.getSource().getBindingContext("MyInfo").getObject();
-
                                 let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
                                // let oModel = oController.getOwnerComponent().getModel("Users");
                                // var odata = oModel1.getProperty("/customer/Customer");
@@ -75,7 +73,6 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                         	   new sap.m.Text({text: "{MyInfo>Status}" }),
 							   new sap.m.Text({text: "{MyInfo>Bankname}"}),
 							   new sap.m.Text({text:"{MyInfo>Nickname}"})
-
                            ]
                         })
                     }
@@ -249,17 +246,32 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
                     };
                     oController.getOwnerComponent().callServer1(oConfig,"Z37_BANKING_NEWCUSTOMER_API").then((response)=>{
                         if(oModel1){
-                            oModel1.setProperty("/customer/Activ",response.CtAcnt);
+                            odata = {};
+                            oModel1.setProperty("/addCustomer",odata);
+                            oModel1.setProperty("/customer/Accounts",response.CtCustomer);
                         }
                     });
-                odata = {};
-                    oModel1.setProperty("/addCustomer",odata);
+                   oView.odialog.close();
+               /* odata = {};
+                    oModel1.setProperty("/addCustomer",odata);*/
                 }
             }),
             endButton:new sap.m.Button({
                 text:"cancel",
                 press:()=>{
-                  oView.odialog.close();
+                    debugger;
+                    let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
+                    odata = {};
+                    oModel1.setProperty("/addCustomer",odata);
+                    //oView.odialog.close();
+                    sap.m.MessageBox.alert("You clicked cancel button", {
+                        title: "Alert Message",
+                        actions: sap.m.MessageBox.Action.CLOSE ,
+                        textDirection: sap.ui.core.TextDirection.Inherit,
+                        onClose: function(oAction)
+                        {oView.odialog.close();}
+
+                    });
                 }
             })
         });
@@ -292,10 +304,8 @@ sap.ui.jsview("banking.OnlineBanking.AccountInfo", {
 			 title: "Account Info",
 			showNavButton:true,
 			navButtonPress: () => {
-			
 				var router = sap.ui.core.UIComponent.getRouterFor(this);
 				router.navBack("details");
-
 //				 router.navTo("details",{"custId": oCustomer.Customer.CustId});
 //				router.navTo("details",custId);
 			},

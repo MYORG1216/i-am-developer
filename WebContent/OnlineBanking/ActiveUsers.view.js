@@ -23,7 +23,6 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 		oView.oTable2 = new sap.m.Table
 		({
 			columns:[
-				
 				new sap.m.Column({
 					header:new sap.m.Text({text:"Customer Id"})
 				}),
@@ -158,19 +157,20 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
                             "AccNo": odata.AccNo,
                             "Branch": odata.Branch,
                             "Branchcode": odata.Branchcode,
-                            "IFSCCODE": odata.IFSCCODE,
+                            "IFSC CODE": odata.IFSCCODE,
                             "Translimit": odata.Translimit,
                             "Status": "A"
                         }
                     };
                     oController.getOwnerComponent().callServer1(oConfig,"z37_BANKING_ACTUSER_API").then((response)=>{
                     //oView.page.setBusy(false);
-
                     if(oModel1){
+                        odata = {};
+                        oModel1.setProperty("/addUser",odata);
                         oModel1.setProperty("/customer/Activ", response.CtActusers);
-                        // oModel1.setProperty("/customer/addUser", response.CtNewusers);
                         }
                 });
+                oView.odialog.close();
 			}
 		}),
 		endButton:new sap.m.Button({
@@ -207,5 +207,4 @@ sap.ui.jsview("banking.OnlineBanking.ActiveUsers", {
 			]
 		});
 	}
-
 });

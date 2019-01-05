@@ -24,7 +24,7 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 			formContainers:[
 				new sap.ui.layout.form.FormContainer({
 					formElements:[
-				new sap.ui.layout.form.FormElement
+			/*	new sap.ui.layout.form.FormElement
 				({	
 					label:"Account No",
 					fields:[ new sap.m.Input({width:"250px",
@@ -32,15 +32,36 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 					  value:"{MyInfo>/addTrans/Account}"
 						})]
 				}),
-				
-					// new sap.ui.layout.form.FormElement
-					// ({
-					// 	label:"User Name",
-					// 	fields:[ new sap.m.ComboBox({width:"250px",
-					// 		type:sap.m.InputType.Text,
-					// 		value:"{MyInfo>/addTrans/UserName}"
-					// 		})]
-					// }),
+					*/	new sap.ui.layout.form.FormElement({
+                            label: "AccountNo",
+                            fields: [new sap.m.ComboBox({width:"250px",
+                              // value:"{MyInfo>/customer/Activ/AccNo}",
+                                items: {
+                                    path: "MyInfo>/customer/Activ",
+                                    factory: function (sIdx, oContxt) {
+                                        debugger;
+                                        return new sap.ui.core.Item({
+                                            text: "{MyInfo>AccNo}"
+                                        })
+                                    }
+                                }
+								/*items:{
+									text: path: "MyInfo>/customer/Activ",
+									factory: function(sIdx, oContxt) {
+		   							 key: ,
+								}
+								}*/
+
+							})]
+                        }),
+
+                        new sap.ui.layout.form.FormElement({
+                            label: "To AccountNo",
+                            fields: [new sap.m.ComboBox({width:"250px",
+
+                            })]
+                        }),
+
 					new sap.ui.layout.form.FormElement
 					({
 						label:"TO AccountNo",
@@ -57,6 +78,7 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 					        value:"{MyInfo>/addTrans/Amount}"
 					    })]
 					}),
+
 					new sap.ui.layout.form.FormElement
 					({
 						label:"Remarks",
@@ -108,9 +130,11 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 					debugger
 					let oModel1 = oController.getOwnerComponent().getModel("MyInfo");
 					var odata = oModel1.getProperty("/addTrans");
+                    var sId = `TRN${((Math.random() * 9999).toString()).substr(0,3)}${"ATA"}${((new Date().getTime() * Math.random()).toString()).substr(2, 6)}`;
 					oConfig = {
 							"IsTransactions":{
 								"Fromt":odata.Account,
+								"Trnsid":sId,
 						    	// Username:odata.Username,
 						    	"Tot":odata.AccountNo,
 						    	"Amount":odata.Amount,
@@ -120,18 +144,13 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 					};
                     oController.getOwnerComponent().callServer1(oConfig,"Z37_TRASCOUNT_API").then((response)=>{
 					// oController.callServer(oConfig).then((response)=>{
-						debugger
+						debugger;
 						// let oModel = oController.getOwnerComponent().getModel("MyInfo");
 						if(oModel1){
-							oModel1.setProperty("/customer", response.rvmsg);
+							oModel1.setProperty("/rvmsg", response.rvmsg);
 						}
-// 						if (response.CsCustomer.Customer.Name === "No customer"){
-// //							mess-strip
-// 						}
-// 						else{
-// 							oController.navi();
-// 						}
 					});
+                    odialog1.close();
 			}
 			}),
 			endButton: new sap.m.Button({
@@ -155,10 +174,11 @@ sap.ui.jsview("banking.OnlineBanking.Newtrans", {
 				text:"ok",
 				press:()=>{
 					odialog2.close();
-				}
+                    odata = {};
+                    oModel1.setProperty("/addTrans",odata);
+
+                }
 			})
-		
-			
 		})
 		
 		

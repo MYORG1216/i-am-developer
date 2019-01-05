@@ -534,13 +534,7 @@ sap.ui.jsview("banking.OnlineBanking.firstpage", {
                                                         }
                                                     });
                                                 }
-//								 oController.backendCall(oConfig,
-//										 (oResponse)=>{
-//											 debugger;
-//										 },
-//										 (oError)=>{
-//											 debugger;
-//										 });
+
                                             }
                                         }),
                                         new sap.m.Button({

@@ -191,10 +191,10 @@ sap.ui.jsview("banking.OnlineBanking.details", {
                                 Password: odata.Password
                             }
                         };
-                        // oView.page.setBusy(true);
-                        oController.callServer3(oConfig).then((response) => {
-                            debugger;
-                            //oView.page.setBusy(false);
+
+                       // oController.callServer3(oConfig).then((response) => {
+
+                           oController.onInit(oConfig).then((response) => {
                             debugger;
                             if (oModel1) {
                                 oModel1.setProperty("/customer/Activ", response.CtActusers);
